@@ -193,7 +193,7 @@ ol.how li::marker{font-weight:800;color:var(--c)}
 .nav.next{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .nav:disabled{opacity:.3;cursor:default}
 .count{font-family:var(--display);font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums;min-width:62px;text-align:center}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
 .tabs button{border:0;background:none;padding:4px 0 5px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.66rem;font-weight:600;color:var(--muted)}
 .tabs svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tabs button[aria-selected="true"]{color:var(--accent)}
@@ -266,6 +266,67 @@ td button small{display:inline-block;font-size:.66rem;font-weight:700;padding:0 
 .shadow{fill:#000;opacity:.28}
 :root[data-theme="light"] .shadow{opacity:.12}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .shadow{opacity:.12}}
+
+/* duo */
+.welcome{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-left,0px));animation:inF .3s ease-out}
+.wcard{max-width:360px;width:100%;text-align:center}
+.wlogo{width:84px;height:84px;margin:0 auto 10px;display:block}
+.wcard h2{font-family:var(--display);font-weight:900;font-size:2.2rem;text-transform:uppercase;margin:0 0 6px}
+.wcard p{color:var(--muted);margin:0 0 20px}
+.wbtns{display:grid;gap:10px}
+.wbtns button{border:2px solid var(--pc);background:var(--panel);border-radius:16px;padding:18px;font-family:var(--display);font-weight:900;font-size:1.8rem;text-transform:uppercase;color:var(--pc);transition:transform .12s}
+.wbtns button:active{transform:scale(.97)}
+.duo .box{margin-top:10px}
+.duoh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.duoh small{color:var(--muted);font-size:.78rem}
+.box h3 small{font-family:var(--body);font-weight:600;font-size:.78rem;text-transform:none;letter-spacing:0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pc{border:2px solid var(--line);border-radius:14px;padding:10px;background:var(--panel2);min-width:0}
+.pc.lead{border-color:var(--pc);box-shadow:0 0 0 3px color-mix(in srgb,var(--pc) 25%,transparent)}
+.pn{font-family:var(--display);font-weight:900;font-size:1.25rem;text-transform:uppercase;color:var(--pc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pn small{font-family:var(--body);font-size:.7rem;color:var(--muted);text-transform:none;font-weight:600}
+.pts{display:block;font-family:var(--display);font-weight:900;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.pl{font-size:.72rem;color:var(--muted)}
+.pc .pr{display:flex;justify-content:space-between;font-size:.84rem;padding:3px 0;border-top:1px solid var(--line);margin-top:3px}
+.pc .pr b{font-variant-numeric:tabular-nums}
+.duo .stats{margin-top:10px}
+.wa{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;width:100%;padding:11px}
+.betres{margin:0 0 8px}
+.wrow input[type=text]{flex:1;width:auto;min-width:0}
+.brh,.br{display:grid;grid-template-columns:1fr 64px 64px;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:.86rem}
+.brh{font-size:.75rem;padding-top:0}
+.brh b,.br b{text-align:center;font-variant-numeric:tabular-nums}
+.br:last-child{border-bottom:0}
+.br b.win{background:var(--pc);color:#14171b;border-radius:6px;padding:1px 0}
+.rl{fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;font-weight:700;margin-top:4px}
+.leg span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--pc);margin-right:6px}
+.mss{display:grid;gap:6px}
+.ms{display:grid;grid-template-columns:1fr 90px auto;gap:8px;align-items:center;font-size:.86rem;padding:6px 8px;border-radius:10px;background:var(--panel2)}
+.ms i{height:6px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+.ms i::after{content:"";position:absolute;inset:0;background:var(--accent);transform:scaleX(var(--p));transform-origin:left}
+.ms small{color:var(--muted);font-variant-numeric:tabular-nums}
+.ms.ok{background:color-mix(in srgb,var(--accent) 16%,var(--panel2))}
+.ms.ok b{grid-column:2/4;text-align:right;color:var(--accent);font-size:.8rem}
+.dsets{display:flex;flex-direction:column;gap:4px;flex:none}
+.drow{display:flex;gap:4px;align-items:center}
+.drow span{width:20px;height:20px;border-radius:50%;background:var(--pc);color:#14171b;font-weight:800;font-size:.72rem;display:grid;place-items:center;flex:none}
+.drow .set{min-width:34px;padding:3px 4px;font-size:.8rem;border-radius:9px}
+.more button.on{border-color:var(--c);color:var(--c)}
+.who{display:flex;gap:6px}
+.vtop{display:flex;gap:6px;flex-wrap:wrap}
+.vtop label{cursor:pointer}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.vp{border:2px solid transparent;border-radius:10px;padding:0;overflow:hidden;background:var(--panel2);position:relative;aspect-ratio:3/4;max-width:100%}
+.vp img{width:100%;height:100%;object-fit:cover;display:block}
+.vp span{position:absolute;left:0;right:0;bottom:0;font-size:.68rem;font-weight:700;padding:2px 4px;background:rgba(0,0,0,.55);color:#fff}
+.vp.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.cmp{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px max(16px,env(safe-area-inset-left,0px));color:#fff;animation:inF .25s ease-out}
+.cmpi{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%;max-width:560px}
+.cmpi figure{margin:0}
+.cmpi img{width:100%;border-radius:10px;display:block;max-height:70vh;object-fit:contain;background:#111}
+.cmpi figcaption{font-size:.8rem;text-align:center;margin-top:4px}
+.cmp p{margin:0;font-weight:700}
 </style>
 </head>
 <body>
@@ -292,6 +353,7 @@ td button small{display:inline-block;font-size:.66rem;font-weight:700;padding:0 
   <nav class="tabs" role="tablist">
     <button role="tab" data-t="work" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 10v4M6 7v10M18 7v10M21 10v4M6 12h12"/></svg>Workout</button>
     <button role="tab" data-t="week" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Week</button>
+    <button role="tab" data-t="duo" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M12 20c0-3.3 1.8-6 4-6s6 2.7 6 6"/></svg>Duo</button>
     <button role="tab" data-t="prog" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M3 20h18M6 16l4-5 3 3 5-7"/></svg>Progress</button>
     <button role="tab" data-t="guide" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>Guide</button>
   </nav>
@@ -437,8 +499,8 @@ const DAYS=[
 /* ===== storage ===== */
 const SKEY="grg-v1";
 let ST8={};try{ST8=JSON.parse(localStorage.getItem(SKEY)||"{}")}catch(e){ST8={}}
-ST8.sets??={};ST8.w??={};ST8.bw??=[];ST8.swap??={};ST8.snd??=1;ST8.voice??=1;ST8.best??=0;
-const save=()=>{try{localStorage.setItem(SKEY,JSON.stringify(ST8))}catch(e){}};
+ST8.sets??={};ST8.w??={};ST8.bw??=[];ST8.swap??={};ST8.snd??=1;ST8.voice??=1;ST8.best??=0;ST8.hype??=1;ST8.duo??=0;ST8.mateSets??={};ST8.remote??={};ST8.seen??={};
+const save=()=>{try{localStorage.setItem(SKEY,JSON.stringify(ST8))}catch(e){}queuePush()};
 const dk=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 const TODAY=dk(new Date());
 if(!ST8.start){ST8.start=TODAY;save()}
@@ -696,6 +758,7 @@ function render(){
  sc.style.transition="";sc.style.transform="";sc.style.opacity="";sc.className="";void sc.offsetWidth;sc.className=dirn==="r"?"in-r":dirn==="l"?"in-l":"in-f";dirn="f";
  if(tab==="week")return weekView(sc);
  if(tab==="prog")return progView(sc);
+ if(tab==="duo")return duoView(sc);
  if(tab==="guide")return guideView(sc);
  workView(sc);
 }
@@ -710,7 +773,7 @@ function dayHead(){
 }
 function bindSteps(){document.querySelectorAll(".step").forEach(b=>b.onclick=()=>{const n=+b.dataset.i;dirn=n>idx?"r":n<idx?"l":"f";idx=n;SFX.tap();render()})}
 const warmDone=()=>!!ST8.sets[TODAY]?.[`warm-${day}`];
-const coachLabel=g=>`▶ Coach set ${Math.min((g.indexOf(0)+1)||g.length,g.length)}`;
+const coachLabel=g=>{if(duoOn()){const t=turn();return t?`▶ Coach · ${whoName(t.who)} set ${t.k+1}`:"✓ All sets done"}g=g||getSets(day,idx-1);return `▶ Coach set ${Math.min((g.indexOf(0)+1)||g.length,g.length)}`};
 
 function workView(sc){
  const D=DAYS[day];
@@ -736,16 +799,17 @@ function workView(sc){
  <div class="ename">${esc(ex.n)}</div>
  <div class="scheme"><span><b>${sets.length}</b> × <b>${reps}</b></span><span>Rest <b>${mmss(I.rest)}</b></span><span>Down <b>${I.ecc.toFixed(0)}s</b> · Up <b>${I.con.toFixed(0)}s</b></span></div>
  <div class="act"><button class="coach" id="coach">${coachLabel(sets)}</button>
-  <div class="sets">${sets.map((d,k)=>`<button class="set${d?" on":""}" data-s="${k}" aria-label="Set ${k+1}${d?" done":""}">${d?"✓ ":""}Set ${k+1}</button>`).join("")}</div></div>
+  ${duoOn()?`<div class="dsets">${[["me",sets],["mate",getMate(day,i)]].map(([w,g])=>`<div class="drow" style="--pc:var(${PCOL[whoName(w)]})"><span>${whoName(w)[0]}</span>${g.map((d,k)=>`<button class="set${d?" on":""}" data-s="${k}" data-w="${w}" aria-label="${whoName(w)} set ${k+1}${d?" done":""}">${d?"✓":k+1}</button>`).join("")}</div>`).join("")}</div>`:`<div class="sets">${sets.map((d,k)=>`<button class="set${d?" on":""}" data-s="${k}" data-w="me" aria-label="Set ${k+1}${d?" done":""}">${d?"✓ ":""}Set ${k+1}</button>`).join("")}</div>`}</div>
  <div class="timer" id="timer" hidden><span>Rest</span><b id="tleft">0:00</b><div class="tb"><button id="tplus">+15s</button><button id="tskip">Skip</button></div><div class="bar" id="tbar"></div></div>
  <div class="howbox"><ol class="how">${ex.how.map(h=>`<li>${esc(h)}</li>`).join("")}</ol><p class="tip">${esc(ex.tip)}</p></div>
- <div class="more"><button id="mLog">${lastW?`Log · <b>${lastW.kg} kg</b>`:"Weight log"}</button><button id="mSwap">${id!==orig?"Swapped ↺":"Swap"}</button><button id="mLearn">Muscles</button></div>
+ <div class="more"><button id="mLog">${lastW?`Log · <b>${lastW.kg} kg</b>`:"Weight log"}</button><button id="mSwap">${id!==orig?"Swapped ↺":"Swap"}</button><button id="mLearn">Muscles</button>${ST8.me?`<button id="mDuo" class="${ST8.duo?"on":""}">Duo ${ST8.duo?"on":"off"}</button>`:""}</div>
  </div>`;
  bindSteps();fitName();
  startAnim(ex,int);
  $("pp").onclick=()=>{anim.playing=!anim.playing;$("pp").textContent=anim.playing?"Pause":"Play";if(anim.playing){anim.t0=performance.now()-anim.el*1000/(anim.speed||1);loop()}};
- document.querySelectorAll(".set").forEach(b=>b.onclick=()=>toggleSet(+b.dataset.s));
+ document.querySelectorAll(".set").forEach(b=>b.onclick=()=>b.dataset.w==="mate"?toggleMate(+b.dataset.s):toggleSet(+b.dataset.s));
  $("coach").onclick=()=>guided?endGuided(false):startGuided();
+ if($("mDuo"))$("mDuo").onclick=()=>{ST8.duo=ST8.duo?0:1;saveLocal();SFX.tap();toast(ST8.duo?`Duo mode: one phone for ${ME()} and ${MATE()}`:"Duo mode off");render()};
  $("mLog").onclick=()=>openSheet("log");$("mSwap").onclick=()=>openSheet("swap");$("mLearn").onclick=()=>openSheet("learn");
  if(rest)showRest();
 }
@@ -772,7 +836,8 @@ function openSheet(kind){
  sh.innerHTML=`<div class="wrap"><div class="grab"></div>${h}<button class="btn" id="shClose" style="width:100%;margin-top:12px">Close</button></div>`;
  document.body.append(sc,sh);
  $("shClose").onclick=closeSheet;
- if(kind==="log")$("saveKg").onclick=()=>{const v=parseFloat($("kg").value);if(!(v>=0))return toast("Enter a weight in kg");(ST8.w[id]??=[]);const L=ST8.w[id];if(L.length&&L[L.length-1].d===TODAY)L[L.length-1].kg=v;else L.push({d:TODAY,kg:v});save();SFX.set();toast(`Saved ${v} kg`);closeSheet();const b=$("mLog");if(b)b.innerHTML=`Log · <b>${v} kg</b>`};
+ if(kind==="log")$("saveKg").onclick=()=>{const v=parseFloat($("kg").value);if(!(v>=0))return toast("Enter a weight in kg");(ST8.w[id]??=[]);const L=ST8.w[id];const prev=Math.max(0,...L.filter(x=>x.d!==TODAY).map(x=>+x.kg||0));if(L.length&&L[L.length-1].d===TODAY)L[L.length-1].kg=v;else L.push({d:TODAY,kg:v});save();
+ if(prev>0&&v>prev){SFX.win();toast(`NEW PR! ${v} kg 🔥`);say(ST8.hype?pick(HY.pr):"New record");if(navigator.vibrate)try{navigator.vibrate([50,30,80])}catch(e){}}else{SFX.set();toast(`Saved ${v} kg`)}closeSheet();const b=$("mLog");if(b)b.innerHTML=`Log · <b>${v} kg</b>`};
  if(kind==="swap"){
   if($("unswap"))$("unswap").onclick=()=>{delete ST8.swap[`${day}-${i}`];save();closeSheet();render()};
   sh.querySelectorAll("#swaps button").forEach(b=>b.onclick=()=>{ST8.swap[`${day}-${i}`]=b.dataset.k;save();closeSheet();SFX.tap();toast(`Swapped to ${LIB[b.dataset.k].n}`);render()})}
@@ -798,12 +863,13 @@ function loop(){
 /* sets, rest timer, guided coach */
 function toggleSet(k,force){
  const i=idx-1,g=getSets(day,i);g[k]=force??(g[k]?0:1);putSets(day,i,g);
- const b=document.querySelector(`.set[data-s="${k}"]`);if(b){b.classList.toggle("on",!!g[k]);b.textContent=(g[k]?"✓ ":"")+"Set "+(k+1)}
+ const b=document.querySelector(`.set[data-w="me"][data-s="${k}"]`);if(b){b.classList.toggle("on",!!g[k]);b.textContent=duoOn()?(g[k]?"✓":k+1):(g[k]?"✓ ":"")+"Set "+(k+1)}
  if(g[k]){SFX.set();if(navigator.vibrate)try{navigator.vibrate(40)}catch(e){}}
  refreshProgress();
  const all=g.every(Boolean);
  if(dayPct(day)>=1&&g[k]){celebrate();return}
- if(g[k]){const int=exAt(day,i).int;startRest(INT[int].rest,all)}
+ if(g[k]&&duoOn()&&!getMate(day,i)[k]){stopRest();say(`${MATE()}'s turn`,true)}
+ else if(g[k]){const int=exAt(day,i).int;startRest(INT[int].rest,all&&(!duoOn()||getMate(day,i).every(Boolean)))}
  else stopRest();
  const c=$("coach");if(c&&!guided)c.textContent=coachLabel(g);
 }
@@ -837,22 +903,22 @@ function stopRest(){if(rest){clearInterval(rest.iv);killTones(rest.sched);rest=n
    the tick is scheduled ahead by the speaker latency and the voice is started a little early so the number lands on time. */
 const CD=1.0,VLEAD=.28;
 function startGuided(){
- ac();stopRest();closeSheet();const i=idx-1,{ex,int}=exAt(day,i),g=getSets(day,i),k=g.indexOf(0);
+ ac();stopRest();closeSheet();const i=idx-1,{ex,int}=exAt(day,i),T=turn(),k=T?T.k:-1,who=T?T.who:"me";
  if(k<0){toast("All sets done. Tap a set to redo it.");return}
  const target=topReps(repsOf(ex,int));
- guided={k,target,rep:0,said:0,phase:"count",segs:timing(ex,int),sched:[]};
+ guided={k,who,target,rep:0,said:0,phase:"count",segs:timing(ex,int),sched:[]};
  keepAwake(true);
  $("coach").textContent="■ Stop";$("coach").classList.add("stop");
- const ov=$("repov");ov.hidden=false;$("repof").textContent=`Set ${k+1} · ${target} reps`;$("repn").textContent="3";
+ const ov=$("repov");ov.hidden=false;$("repof").textContent=`${duoOn()?whoName(who)+" · ":""}Set ${k+1} · ${target} reps`;$("repn").textContent="3";
  anim.playing=false;cancelAnimationFrame(anim.raf);anim.ex=ex;$("figsvg").innerHTML=figure(ex,0);
- say(`Set ${k+1}. ${target} reps.`,true);
+ say(duoOn()?`${whoName(who)}, set ${k+1}. ${target} reps.`:`Set ${k+1}. ${target} reps.`,true);
  const lead=1.2,L=outLat(),t0=performance.now();
  if(ST8.snd&&ac())guided.sched=[SFX.beep(lead-L),SFX.beep(lead+CD-L),SFX.beep(lead+2*CD-L),SFX.go(lead+3*CD-L)];
  const pop=n=>{const r=$("repn");if(!r)return;r.textContent=n;r.classList.remove("pop");void r.offsetWidth;r.classList.add("pop")};
  const at=(sec,fn)=>{const d=t0+sec*1000-performance.now();return setTimeout(fn,Math.max(0,d))};
  let n=3;const cd=()=>{if(!guided)return;
   if(n>0){pop(n);n--;guided.to=at(lead+(3-n)*CD,cd)}
-  else{pop(0);$("repof").textContent=`of ${target}`;say("Go",true);guided.phase="go";anim.segs=guided.segs;anim.t0=t0+(lead+3*CD)*1000;anim.speed=1;anim.playing=true;anim.el=0;
+  else{pop(0);$("repof").textContent=`of ${target}`;say(ST8.hype?pick(HY.go):"Go",true);guided.phase="go";anim.segs=guided.segs;anim.t0=t0+(lead+3*CD)*1000;anim.speed=1;anim.playing=true;anim.el=0;
    guided.cEnd=conEnd(ex,guided.segs);guided.T=guided.segs.reduce((a,s)=>a+s[2],0);loop()}};
  guided.to=at(lead,cd);
 }
@@ -860,17 +926,17 @@ function guidedTick(){
  if(!guided||guided.phase!=="go")return;
  const el=anim.el,repAt=n=>guided.cEnd+(n-1)*guided.T,L=outLat();
  /* voice a little early so it is heard as the rep completes */
- const nv=guided.said+1;if(nv<=guided.target&&el>=repAt(nv)-VLEAD){guided.said=nv;sayRep(nv)}
+ const nv=guided.said+1;if(nv<=guided.target&&el>=repAt(nv)-VLEAD){guided.said=nv;hypeRep(nv,guided.target)}
  const n=guided.rep+1;
  if(el>=repAt(n)-L-.02){guided.rep=n;const w=Math.max(0,repAt(n)-el-L);SFX.tick(w);
   setTimeout(()=>{const r=$("repn");if(r&&guided){r.textContent=n;r.classList.remove("pop");void r.offsetWidth;r.classList.add("pop")}},Math.max(0,(repAt(n)-el)*1000));
   if(n>=guided.target){guided.phase="end";guided.to=setTimeout(()=>endGuided(true),600)}}
 }
 function endGuided(finished){
- if(!guided)return;clearTimeout(guided.to);killTones(guided.sched);const k=guided.k;guided=null;
+ if(!guided)return;clearTimeout(guided.to);killTones(guided.sched);const k=guided.k,who=guided.who;guided=null;
  const ov=$("repov");if(ov)ov.hidden=true;
  const c=$("coach");if(c){c.classList.remove("stop")}
- if(finished){toggleSet(k,1)}else{say("Stopped",true);const g=getSets(day,idx-1);if(c)c.textContent=coachLabel(g)}
+ if(finished){who==="mate"?toggleMate(k,1):toggleSet(k,1)}else{say("Stopped",true);if(c)c.textContent=coachLabel()}
  keepAwake(!!rest);
 }
 
@@ -947,8 +1013,10 @@ function progView(sc){
  <div class="box"><h3>Body weight</h3>
   <div class="wrow"><input id="bwIn" type="number" inputmode="decimal" step="0.1" placeholder="kg" aria-label="Body weight in kg"><button class="btn pri" id="bwSave">Add</button><span class="muted">Weigh once a week, morning, before food.</span></div>
   <div class="chart" id="bwChart" style="margin-top:10px">${bwChart(bw)}</div></div>
+ <div class="box"><h3>Photo vault <small class="muted">private</small></h3><div id="vault"><p class="muted" style="margin:0">Loading…</p></div></div>
  <div class="box"><h3>Your lifts</h3>${lifts?`<div class="lifts">${lifts}</div>`:`<p class="muted" style="margin:0">Save your weight on any exercise and it shows up here.</p>`}</div>`;
  $("bwSave").onclick=()=>{const v=parseFloat($("bwIn").value);if(!(v>20&&v<300))return toast("Enter your weight in kg");const L=ST8.bw;if(L.length&&L[L.length-1].d===TODAY)L[L.length-1].kg=v;else L.push({d:TODAY,kg:v});save();SFX.set();progView(sc)};
+ vaultRender();
 }
 function bwChart(d){
  if(d.length<2)return `<p class="muted" style="margin:0">${d.length?`First entry: <b>${d[0].kg} kg</b>. Add one more next week to see your line.`:"Add your weight to start the chart."}</p>`;
@@ -996,17 +1064,21 @@ function guideView(sc){
  <div class="box"><h3>Settings</h3>
  <div class="set-row"><span>Sound effects</span><button class="sw" role="switch" id="swS" aria-checked="${!!ST8.snd}" aria-label="Sound effects"></button></div>
  <div class="set-row"><span>Voice coach</span><button class="sw" role="switch" id="swV" aria-checked="${!!ST8.voice}" aria-label="Voice coach"></button></div>
+ <div class="set-row"><span>Hype voice <small class="muted">"Last one!", "Shabaash!"</small></span><button class="sw" role="switch" id="swH" aria-checked="${!!ST8.hype}" aria-label="Hype voice"></button></div>
+ <div class="set-row"><span>This phone belongs to</span><div class="who">${PEOPLE.map(n=>`<button class="btn${ST8.me===n?" pri":""}" data-me="${n}">${n}</button>`).join("")}</div></div>
  <div class="set-row"><span>Test the sound</span><button class="btn" id="testS">Play</button></div></div>`;
  sc.querySelectorAll(".wk button").forEach(b=>b.onclick=()=>{const n=+b.dataset.w,d=new Date();d.setDate(d.getDate()-(n-1)*7);ST8.start=dk(d);save();SFX.tap();render()});
  $("swS").onclick=()=>{ST8.snd=ST8.snd?0:1;save();$("swS").setAttribute("aria-checked",!!ST8.snd);sndIcon();if(ST8.snd){ac();SFX.set()}};
  $("swV").onclick=()=>{ST8.voice=ST8.voice?0:1;save();$("swV").setAttribute("aria-checked",!!ST8.voice);if(ST8.voice)say("Voice coach on")};
+ $("swH").onclick=()=>{ST8.hype=ST8.hype?0:1;saveLocal();$("swH").setAttribute("aria-checked",!!ST8.hype);if(ST8.hype)say(pick(HY.done))};
+ sc.querySelectorAll("[data-me]").forEach(b=>b.onclick=()=>{ST8.me=b.dataset.me;saveLocal();SFX.tap();toast(`This phone is ${ST8.me}'s`);render();pull().then(pushMe)});
  $("testS").onclick=()=>{ac();SFX.set();say("Welcome to Ghost Riders Gym. Let's train.")};
 }
 
 /* ===== effects ===== */
 function toast(t){document.querySelectorAll(".toast").forEach(x=>x.remove());const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
 function celebrate(){
- stopRest();SFX.win();say("Workout complete. Great job. Now finish with cardio.");
+ stopRest();SFX.win();say(`Workout complete. ${ST8.hype?pick(HY.done)+" ":""}Great job${ST8.me?", "+ST8.me:""}. Now finish with cardio.`);
  if(navigator.vibrate)try{navigator.vibrate([60,40,60,40,120])}catch(e){}
  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
  const cv=$("fx"),x=cv.getContext("2d"),W=cv.width=innerWidth,H=cv.height=innerHeight,cs=getComputedStyle(document.documentElement);
@@ -1015,6 +1087,188 @@ function celebrate(){
  const t0=performance.now();const fr=n=>{const t=(n-t0)/1000;x.clearRect(0,0,W,H);ps.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.a+=p.va;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.globalAlpha=Math.max(0,1-t/2.6);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);x.restore()});if(t<2.7)requestAnimationFrame(fr);else x.clearRect(0,0,W,H)};requestAnimationFrame(fr)}
  toast("Day complete! 🔥");
  setTimeout(()=>{dirn="r";idx=DAYS[day].sl.length+1;render()},1600);
+}
+
+/* ===== duo: Sulait & Zubair ===== */
+const PEOPLE=["Sulait","Zubair"],PCOL={Sulait:"--accent",Zubair:"--back"};
+const ME=()=>ST8.me,MATE=()=>PEOPLE.find(n=>n!==ST8.me);
+const APP_URL="https://ayyubisulait220762-spec.github.io/GHOST-RIDERS-GYM/";
+const DB="https://ghost-riders-gym-default-rtdb.asia-southeast1.firebasedatabase.app/grg_YHSSlWYK9ZGHFj";
+let pushT=null,syncOK=null;
+const saveLocal=()=>{try{localStorage.setItem(SKEY,JSON.stringify(ST8))}catch(e){}};
+async function api(path,method="GET",body){
+ const r=await fetch(`${DB}${path}.json`,{method,cache:"no-store",headers:body?{"Content-Type":"application/json"}:undefined,body:body===undefined?undefined:JSON.stringify(body)});
+ if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}
+function queuePush(){if(!ST8.me)return;clearTimeout(pushT);pushT=setTimeout(pushMe,1200)}
+function recentSets(){const cut=dk(new Date(Date.now()-150*864e5)),o={};for(const d in ST8.sets)if(d>=cut&&ST8.sets[d]&&Object.keys(ST8.sets[d]).length)o[d]=ST8.sets[d];return o}
+async function pushMe(){if(!ST8.me)return;try{await api(`/users/${ST8.me}`,"PUT",{sets:recentSets(),w:ST8.w,bw:ST8.bw,best:ST8.best,start:ST8.start,t:Date.now()});syncOK=true}catch(e){syncOK=false}}
+const orStr=(a="",b="")=>{let o="";for(let j=0;j<Math.max(a.length,b.length);j++)o+=(a[j]==="1"||b[j]==="1")?"1":"0";return o};
+async function pull(){
+ if(!ST8.me)return;
+ try{
+  const d=await api("")||{};syncOK=true;
+  ST8.remote={users:d.users||{},bets:d.bets||{},check:d.check||{},t:Date.now()};
+  let changed=false;
+  /* sets your buddy ticked for you in Duo mode */
+  const inbox=d.duo?.[ST8.me];
+  if(inbox){for(const dt in inbox)for(const k in inbox[dt]){(ST8.sets[dt]??={});ST8.sets[dt][k]=orStr(ST8.sets[dt][k],inbox[dt][k])}changed=true;api(`/duo/${ST8.me}`,"DELETE").catch(()=>{})}
+  /* new phone: bring your own history back */
+  const mine=d.users?.[ST8.me];
+  if(mine){for(const dt in mine.sets||{})for(const k in mine.sets[dt]){(ST8.sets[dt]??={});if(!ST8.sets[dt][k]){ST8.sets[dt][k]=mine.sets[dt][k];changed=true}}
+   if(!Object.keys(ST8.w).length&&mine.w){ST8.w=mine.w;changed=true}
+   if(!ST8.bw.length&&Array.isArray(mine.bw)){ST8.bw=mine.bw.filter(Boolean);changed=true}}
+  alerts();
+  if(changed){saveLocal();queuePush();if(tab==="work")refreshSafe()}else saveLocal();
+  if(tab==="duo"&&!document.activeElement?.matches?.("input"))duoView($("screen"),true);
+ }catch(e){syncOK=false;if(tab==="duo"){const s=$("syncS");if(s)s.textContent=syncLabel()}}
+}
+function refreshSafe(){if(!guided&&!warm&&!document.querySelector(".sheet"))render()}
+function alerts(){
+ const mate=MATE(),mu=ST8.remote.users?.[mate];ST8.seen??={};ST8.seen.pr??={};
+ if(mu?.w)for(const k in mu.w){if(!LIB[k])continue;const mb=Math.max(0,...Object.values(mu.w[k]||{}).filter(Boolean).map(x=>+x.kg||0)),myb=Math.max(0,...(ST8.w[k]||[]).map(x=>+x.kg||0)),seen=ST8.seen.pr[k];
+  if(seen!==undefined&&mb>seen&&mb>myb){toast(`${mate} beat your ${LIB[k].n} record: ${mb} kg`);say(`${mate} just beat your ${LIB[k].n} record.`)}
+  ST8.seen.pr[k]=mb}
+ const ch=ST8.remote.check?.[mate]?.t;
+ if(ch&&ch>(ST8.seen.check||0)&&Date.now()-ch<3*3600e3){toast(`${mate} is at the gym 💪`);ST8.seen.check=ch}
+}
+function syncLabel(){if(syncOK===false)return "Offline · will sync later";const t=ST8.remote?.t;if(!t)return "Connecting…";const m=Math.round((Date.now()-t)/60000);return m<1?"Synced just now":`Synced ${m} min ago`}
+
+/* data for one person: you from this phone, your buddy from the cloud */
+const U=n=>n===ST8.me?{sets:ST8.sets,w:ST8.w,bw:ST8.bw}:(()=>{const u=ST8.remote?.users?.[n]||{};return{sets:u.sets||{},w:u.w||{},bw:Array.isArray(u.bw)?u.bw.filter(Boolean):Object.values(u.bw||{}),t:u.t}})();
+const isSetKey=k=>/^\d-\d$/.test(k);
+const trainedU=(u,d)=>Object.entries(u.sets[d]||{}).some(([k,v])=>isSetKey(k)&&String(v).includes("1"));
+const addDays=(s,n)=>{const d=new Date(s+"T12:00");d.setDate(d.getDate()+n);return dk(d)};
+const weekStart=(s=TODAY)=>{const d=new Date(s+"T12:00");d.setDate(d.getDate()-((d.getDay()+1)%7));return dk(d)};
+function wlist(u,k){const v=u.w[k];return(Array.isArray(v)?v:Object.values(v||{})).filter(Boolean).map(x=>({d:x.d,kg:+x.kg||0})).sort((a,b)=>a.d<b.d?-1:1)}
+function weekStats(u,ws){
+ let sets=0,days=0,full=0,prs=0;const we=addDays(ws,6);
+ for(let j=0;j<7;j++){const d=addDays(ws,j),o=u.sets[d]||{},per={};let any=false;
+  for(const k in o)if(isSetKey(k)){const c=String(o[k]).split("").filter(x=>x==="1").length;sets+=c;per[k[0]]=(per[k[0]]||0)+c;if(c)any=true}
+  if(any)days++;for(const p in per)if(per[p]>=6*nSets())full++}
+ for(const k in u.w){let mx=0;for(const e of wlist(u,k)){if(e.d>=ws&&e.d<=we&&mx>0&&e.kg>mx)prs++;mx=Math.max(mx,e.kg)}}
+ return{sets,days,full,prs,pts:sets*10+full*50+prs*25};
+}
+function buddyStreak(){const a=U(PEOPLE[0]),b=U(PEOPLE[1]);let c=0;const d=new Date();
+ for(let k=0;k<400;k++){const s=dk(d),both=trainedU(a,s)&&trainedU(b,s);if(both)c++;else if(d.getDay()===5||k===0){}else break;d.setDate(d.getDate()-1)}
+ if(c>(ST8.buddyBest||0)){ST8.buddyBest=c;saveLocal()}return c}
+function totals(){let sets=0;const days=new Set();for(const n of PEOPLE){const u=U(n);for(const d in u.sets){let any=false;for(const k in u.sets[d])if(isSetKey(k)){const c=String(u.sets[d][k]).split("").filter(x=>x==="1").length;sets+=c;if(c)any=true}if(any)days.add(n+d)}}return{sets,days:days.size}}
+const MILES=[["sets",100,"100 sets"],["sets",500,"500 sets"],["sets",1000,"1,000 sets"],["sets",2500,"2,500 sets"],["sets",5000,"5,000 sets"],["days",20,"20 gym days"],["days",60,"60 gym days"],["days",150,"150 gym days"],["buddy",7,"7-day buddy streak"],["buddy",30,"30-day buddy streak"]];
+const ago=t=>{const m=Math.round((Date.now()-t)/60000);return m<1?"just now":m<60?`${m} min ago`:m<1440?`${Math.round(m/60)} h ago`:`${Math.round(m/1440)} days ago`};
+const nm=n=>`<b style="color:var(${PCOL[n]})">${n}</b>`;
+
+function duoView(sc,quiet){
+ if(!ST8.me){sc.innerHTML=`<div class="card"><span class="big">Duo</span><p>Pick who you are first.</p><button class="btn pri" id="pickMe">Choose</button></div>`;$("pickMe").onclick=welcome;return}
+ const me=ME(),mate=MATE(),ws=weekStart(),lws=addDays(ws,-7);
+ const A=weekStats(U(me),ws),B=weekStats(U(mate),ws),LA=weekStats(U(me),lws),LB=weekStats(U(mate),lws);
+ const has=!!ST8.remote?.users?.[mate];
+ const lead=A.pts===B.pts?null:A.pts>B.pts?me:mate;
+ const card=(n,s)=>`<div class="pc${lead===n?" lead":""}" style="--pc:var(${PCOL[n]})"><div class="pn">${lead===n?"👑 ":""}${n}${n===me?" <small>(you)</small>":""}</div><b class="pts">${s.pts}</b><span class="pl">points</span>
+  <div class="pr"><span>Sets</span><b>${s.sets}</b></div><div class="pr"><span>Days</span><b>${s.days}</b></div><div class="pr"><span>Full days</span><b>${s.full}</b></div><div class="pr"><span>PRs</span><b>${s.prs}</b></div></div>`;
+ const bs=buddyStreak(),tt=totals();
+ const myCheck=ST8.remote?.check?.[me]?.t,mateCheck=ST8.remote?.check?.[mate]?.t;
+ const bet=ST8.remote?.bets?.[ws]?.text||"",lbet=ST8.remote?.bets?.[lws]?.text||"";
+ const lastWin=LA.pts===LB.pts?null:LA.pts>LB.pts?me:mate,loser=lastWin&&PEOPLE.find(n=>n!==lastWin);
+ /* record battles */
+ const keys=[...new Set([...Object.keys(U(me).w),...Object.keys(U(mate).w)])].filter(k=>LIB[k]);
+ let wa=0,wb=0;const rows=keys.map(k=>{const a=Math.max(0,...wlist(U(me),k).map(x=>x.kg)),b=Math.max(0,...wlist(U(mate),k).map(x=>x.kg));if(a>b)wa++;else if(b>a)wb++;
+  return `<div class="br"><span>${esc(LIB[k].n)}</span><b class="${a>b?"win":""}" style="--pc:var(${PCOL[me]})">${a||"–"}</b><b class="${b>a?"win":""}" style="--pc:var(${PCOL[mate]})">${b||"–"}</b></div>`}).join("");
+ const val=(k)=>k==="sets"?tt.sets:k==="days"?tt.days:Math.max(bs,ST8.buddyBest||0);
+ const miles=MILES.map(([k,n,l])=>{const v=val(k),ok=v>=n;return `<div class="ms${ok?" ok":""}"><span>${ok?"🏆":"🔒"} ${l}</span>${ok?"<b>Unlocked</b>":`<i style="--p:${Math.min(1,v/n)}"></i><small>${v}/${n}</small>`}</div>`}).join("");
+ const share=encodeURIComponent(`Ghost Riders Gym 💪 Install our app: ${APP_URL}`);
+ sc.innerHTML=`<div class="duo"><div class="duoh"><h2 class="sec">${me} vs ${mate}</h2><small id="syncS">${syncLabel()}</small></div>
+ ${has?"":`<div class="box"><h3>Waiting for ${mate}</h3><p class="muted" style="margin:0 0 8px">Send ${mate} the app. When he opens it and picks his name, his scores appear here.</p><a class="btn pri wa" href="https://wa.me/?text=${share}" target="_blank" rel="noopener">Send app on WhatsApp</a></div>`}
+ <div class="box"><h3>This week <small class="muted">Sat–Fri</small></h3><div class="vs">${card(me,A)}${card(mate,B)}</div>
+  <p class="muted" style="margin:8px 0 0;font-size:.8rem">10 points a set · 50 for finishing a whole day · 25 for a new personal record.</p></div>
+ <div class="stats"><div class="stat"><b>🤝 ${bs}</b><span>buddy streak</span></div><div class="stat"><b>${tt.sets}</b><span>sets together</span></div><div class="stat"><b>${tt.days}</b><span>gym days together</span></div></div>
+ <div class="box"><h3>Gym check-in</h3><p class="muted" style="margin:0 0 8px">${mateCheck?`${mate} checked in ${ago(mateCheck)}.`:`${mate} hasn't checked in yet.`}${myCheck?` You checked in ${ago(myCheck)}.`:""}</p>
+  <a class="btn pri wa" id="checkIn" href="https://wa.me/?text=${encodeURIComponent(`I'm at the gym 💪 Where are you, ${mate}? ${APP_URL}`)}" target="_blank" rel="noopener">I'm at the gym · tell ${mate}</a></div>
+ <div class="box"><h3>Weekly bet</h3>
+  ${lbet&&lastWin?`<p class="betres">Last week ${nm(lastWin)} won ${Math.max(LA.pts,LB.pts)}–${Math.min(LA.pts,LB.pts)}. ${nm(loser)} pays: <b>${esc(lbet)}</b></p>`:lbet?`<p class="muted">Last week was a tie. Nobody pays.</p>`:""}
+  <div class="wrow"><input id="betIn" type="text" maxlength="60" placeholder="e.g. Loser buys protein shakes" value="${esc(bet)}" aria-label="This week's bet"><button class="btn pri" id="betSave">Save</button></div>
+  <p class="muted" style="margin:6px 0 0;font-size:.8rem">Lower points on Friday night pays up.</p></div>
+ <div class="box"><h3>Record battles <small class="muted">${me} ${wa} – ${wb} ${mate}</small></h3>
+  ${rows?`<div class="brh"><span></span><b style="color:var(${PCOL[me]})">${me}</b><b style="color:var(${PCOL[mate]})">${mate}</b></div>${rows}`:`<p class="muted" style="margin:0">Save your weights on exercises (the Log button). Best lifts face off here.</p>`}</div>
+ <div class="box"><h3>Transformation race</h3>${raceChart(me,mate)}</div>
+ <div class="box"><h3>Team milestones</h3><div class="mss">${miles}</div></div></div>`;
+ $("betSave").onclick=async()=>{const v=$("betIn").value.trim();try{await api(`/bets/${ws}`,"PUT",{text:v,by:me,t:Date.now()});(ST8.remote.bets??={})[ws]={text:v};SFX.set();toast("Bet saved")}catch(e){toast("No internet. Try again.")}};
+ $("checkIn").onclick=()=>{api(`/check/${me}`,"PUT",{t:Date.now()}).then(()=>{(ST8.remote.check??={})[me]={t:Date.now()}}).catch(()=>{});SFX.set()};
+ if(!quiet)pull();
+}
+function raceChart(me,mate){
+ const sr=n=>U(n).bw.filter(x=>x&&x.d&&x.kg).sort((a,b)=>a.d<b.d?-1:1);
+ const a=sr(me),b=sr(mate);
+ if(a.length+b.length<2)return `<p class="muted" style="margin:0">Add your body weight on the Progress tab every week. Both lines show here as % change, so it's fair whatever you weigh.</p>`;
+ const all=[...a,...b].map(x=>x.d).sort(),d0=all[0],d1=all[all.length-1],span=Math.max(1,daysBetween(d0,d1));
+ const pc=s=>s.map(x=>({d:x.d,v:(x.kg-s[0].kg)/s[0].kg*100}));
+ const A=pc(a),B=pc(b),vs=[...A,...B].map(x=>x.v);let mn=Math.min(0,...vs),mx=Math.max(0,...vs);if(mx-mn<2){mn-=1;mx+=1}
+ const W=320,H=160,pl=36,pr=10,pt=12,pb=22,X=d=>pl+daysBetween(d0,d)/span*(W-pl-pr),Y=v=>pt+(mx-v)/(mx-mn)*(H-pt-pb);
+ const line=(s,c)=>s.length?`<polyline points="${s.map(x=>`${X(x.d).toFixed(1)},${Y(x.v).toFixed(1)}`).join(" ")}" style="stroke:var(${c})" class="rl"/>${s.map((x,i)=>`<circle cx="${X(x.d).toFixed(1)}" cy="${Y(x.v).toFixed(1)}" r="${i===s.length-1?4:2.2}" style="fill:var(${c})"/>`).join("")}`:"";
+ const last=s=>s.length?s[s.length-1].v:0,fmt=v=>`${v>0?"+":""}${v.toFixed(1)}%`;
+ const la=last(A),lb=last(B),lead=A.length&&B.length?(la<lb?me:lb<la?mate:null):null;
+ return `<div class="chart"><svg viewBox="0 0 ${W} ${H}"><line class="gl" x1="${pl}" x2="${W-pr}" y1="${Y(0)}" y2="${Y(0)}"/>
+  ${[mx,mn].map(t=>`<text x="${pl-6}" y="${Y(t)+3}" text-anchor="end">${t>0?"+":""}${t.toFixed(1)}%</text>`).join("")}<text x="${pl-6}" y="${Y(0)+3}" text-anchor="end">0%</text>
+  ${line(A,PCOL[me])}${line(B,PCOL[mate])}</svg></div>
+  <div class="leg"><span style="--pc:var(${PCOL[me]})">${me} ${A.length?fmt(la):"–"}</span><span style="--pc:var(${PCOL[mate]})">${mate} ${B.length?fmt(lb):"–"}</span></div>
+  <p class="muted" style="margin:4px 0 0;font-size:.82rem">${lead?`${nm(lead)} has lost more so far.`:"Lower line means more weight lost."}</p>`;
+}
+
+/* first open: who is this phone? */
+function welcome(){
+ document.querySelector(".welcome")?.remove();
+ const o=document.createElement("div");o.className="welcome";
+ o.innerHTML=`<div class="wcard"><svg class="wlogo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="var(--accent)"/><path d="M20 46V27a12 12 0 0 1 24 0v19l-4-3-4 3-4-3-4 3-4-3z" fill="#14171b"/><circle cx="27.5" cy="29" r="2.6" fill="var(--accent)"/><circle cx="36.5" cy="29" r="2.6" fill="var(--accent)"/><rect x="8" y="36" width="48" height="3" rx="1.5" fill="#14171b"/><rect x="9" y="30" width="5" height="15" rx="1.5" fill="#14171b"/><rect x="50" y="30" width="5" height="15" rx="1.5" fill="#14171b"/></svg>
+  <h2>Who's training?</h2><p>Pick your name. Your sets, weights and streaks sync with your gym buddy.</p>
+  <div class="wbtns">${PEOPLE.map(n=>`<button data-n="${n}" style="--pc:var(${PCOL[n]})">${n}</button>`).join("")}</div></div>`;
+ document.body.appendChild(o);
+ o.querySelectorAll("button").forEach(b=>b.onclick=()=>{ST8.me=b.dataset.n;saveLocal();o.remove();ac();say(`Welcome, ${ST8.me}. Let's train.`);render();pull().then(pushMe)});
+}
+
+/* Duo mode on the workout screen: one phone runs sets for both of you */
+const mateKey=(d,i)=>`${d}-${i}`;
+const getMate=(d,i)=>{const v=ST8.mateSets?.[TODAY]?.[mateKey(d,i)]||"";return Array.from({length:nSets()},(_,k)=>v[k]==="1"?1:0)};
+function putMate(d,i,arr){const s=arr.join("");((ST8.mateSets??={})[TODAY]??={})[mateKey(d,i)]=s;saveLocal();
+ if(ST8.me)api(`/duo/${MATE()}/${TODAY}`,"PATCH",{[mateKey(d,i)]:s}).catch(()=>{})}
+const duoOn=()=>!!(ST8.duo&&ST8.me);
+function turn(){const i=idx-1,g=getSets(day,i);if(!duoOn()){const k=g.indexOf(0);return k<0?null:{who:"me",k}}
+ const m=getMate(day,i);for(let k=0;k<g.length;k++){if(!g[k])return{who:"me",k};if(!m[k])return{who:"mate",k}}return null}
+const whoName=w=>w==="mate"?MATE():ME();
+function toggleMate(k,force){
+ const i=idx-1,m=getMate(day,i);m[k]=force??(m[k]?0:1);putMate(day,i,m);
+ const b=document.querySelector(`.set[data-w="mate"][data-s="${k}"]`);if(b){b.classList.toggle("on",!!m[k]);b.textContent=m[k]?"✓":k+1}
+ if(m[k]){SFX.set();const g=getSets(day,i),both=g.every(Boolean)&&m.every(Boolean);
+  if(both&&dayPct(day)>=1){celebrate()}else startRest(INT[exAt(day,i).int].rest,both)}
+ const c=$("coach");if(c&&!guided)c.textContent=coachLabel();
+}
+
+/* hype voice */
+const HY={go:["Go!","Let's go!","Chalo!","Come on!"],last:["Last one!","Aur ek!","One more, push!","Last rep!"],done:["Beast mode!","Shabaash!","Yeah buddy!","Strong!","Ghost rider!","Too easy!"],pr:["New record! Beast!","New P R! Shabaash!"]};
+const pick=a=>a[Math.random()*a.length|0];
+function hypeRep(n,target){
+ if(ST8.hype&&n===target){say(pick(HY.done),true);return}
+ if(ST8.hype&&target>=5&&n===target-1){say(pick(HY.last),true);return}
+ sayRep(n)}
+
+/* photo vault: stays on this phone only (IndexedDB), never uploaded */
+let PDBc=null;
+function pdb(){return new Promise((res,rej)=>{if(PDBc)return res(PDBc);const r=indexedDB.open("grg-photos",1);r.onupgradeneeded=()=>r.result.createObjectStore("p",{keyPath:"id"});r.onsuccess=()=>{PDBc=r.result;res(PDBc)};r.onerror=()=>rej(r.error)})}
+async function pAll(){try{const db=await pdb();return await new Promise(res=>{const q=db.transaction("p").objectStore("p").getAll();q.onsuccess=()=>res((q.result||[]).sort((a,b)=>a.id-b.id));q.onerror=()=>res([])})}catch(e){return[]}}
+async function pOp(fn){const db=await pdb();return new Promise((res,rej)=>{const t=db.transaction("p","readwrite");fn(t.objectStore("p"));t.oncomplete=res;t.onerror=()=>rej(t.error)})}
+function shrink(file){return new Promise((res,rej)=>{const u=URL.createObjectURL(file),img=new Image();img.onload=()=>{const s=Math.min(1,1200/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",.82))};img.onerror=()=>{URL.revokeObjectURL(u);rej()};img.src=u})}
+let vsel=[],delArm=false;
+async function vaultRender(){
+ const el=$("vault");if(!el)return;const ps=await pAll();
+ vsel=vsel.filter(id=>ps.some(p=>p.id===id));
+ const fmt=d=>new Date(d+"T12:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"2-digit"});
+ el.innerHTML=`<div class="vtop"><label class="btn pri" for="vIn">+ Add photo</label><input id="vIn" type="file" accept="image/*" hidden>
+  ${vsel.length===2?`<button class="btn" id="vCmp">Compare</button>`:""}${vsel.length?`<button class="btn" id="vDel">${delArm?"Tap again to delete":"Delete"}</button>`:""}</div>
+  <p class="muted" style="margin:6px 0 8px;font-size:.8rem">${ps.length?"Tap two photos to compare them side by side.":"Same pose, same spot, same light, once a month. Only saved on this phone, never uploaded."}</p>
+  <div class="vgrid">${ps.slice().reverse().map(p=>`<button class="vp${vsel.includes(p.id)?" sel":""}" data-id="${p.id}"><img src="${p.src}" alt="Progress photo ${fmt(p.d)}"><span>${fmt(p.d)}</span></button>`).join("")}</div>`;
+ $("vIn").onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{const src=await shrink(f);await pOp(s=>s.put({id:Date.now(),d:TODAY,src}));SFX.set();toast("Photo saved on this phone")}catch(err){toast("Couldn't read that photo")}vaultRender()};
+ el.querySelectorAll(".vp").forEach(b=>b.onclick=()=>{const id=+b.dataset.id;delArm=false;vsel=vsel.includes(id)?vsel.filter(x=>x!==id):[...vsel,id].slice(-2);vaultRender()});
+ if($("vDel"))$("vDel").onclick=async()=>{if(!delArm){delArm=true;vaultRender();return}delArm=false;await pOp(s=>vsel.forEach(id=>s.delete(id)));vsel=[];toast("Deleted");vaultRender()};
+ if($("vCmp"))$("vCmp").onclick=()=>{const [a,b]=vsel.map(id=>ps.find(p=>p.id===id)).sort((x,y)=>x.id-y.id),days=Math.abs(daysBetween(a.d,b.d));
+  const o=document.createElement("div");o.className="cmp";o.innerHTML=`<div class="cmpi"><figure><img src="${a.src}" alt="Before"><figcaption>Before · ${fmt(a.d)}</figcaption></figure><figure><img src="${b.src}" alt="After"><figcaption>After · ${fmt(b.d)}</figcaption></figure></div><p>${days} days apart</p><button class="btn pri" id="cmpX">Close</button>`;
+  document.body.appendChild(o);$("cmpX").onclick=()=>o.remove()};
 }
 
 /* ===== wiring ===== */
@@ -1055,6 +1309,9 @@ const measure=()=>{const r=document.documentElement.style;r.setProperty("--hh",d
 if(window.ResizeObserver){const ro=new ResizeObserver(measure);ro.observe(document.querySelector("header"));ro.observe(document.querySelector(".dock"))}
 addEventListener("resize",()=>{measure();fitName()});
 render();measure();
+if(!ST8.me)welcome();else{pull();}
+setInterval(()=>{if(document.visibilityState==="visible")pull()},40000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")pull()});
 if("serviceWorker" in navigator&&location.protocol==="https:"&&!/claude\.(ai|site)|claudeusercontent/.test(location.hostname)){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 </script>
 </body>
