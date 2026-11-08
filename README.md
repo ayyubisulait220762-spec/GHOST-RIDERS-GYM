@@ -35,7 +35,7 @@ Friday is rest. H = Heavy 6–8 reps, M = Medium 8–12, P = Pump 12–15. 3 set
 
 1. Create a free account at github.com.
 2. Click **New repository**, name it `ghost-riders-gym`, set it to **Public**, and create it.
-3. Click **uploading an existing file**. Drag in everything from this folder (`index.html`, `manifest.webmanifest`, `sw.js`, `README.md`, `LICENSE`, `.nojekyll` and the `icons` folder). Click **Commit changes**.
+3. Click **uploading an existing file**. Select all 10 files in this folder at once and click **Commit changes**.
 4. Go to **Settings → Pages**. Under *Branch*, choose `main` and `/ (root)`, then **Save**.
 5. Wait 1–2 minutes. Your app is live at `https://YOUR-USERNAME.github.io/ghost-riders-gym/`.
 
@@ -56,7 +56,7 @@ Change the files, upload them again, and change `VERSION` in `sw.js` (for exampl
 index.html             the whole app (HTML, CSS, JavaScript)
 manifest.webmanifest   app name, colors and icons for installing
 sw.js                  offline support
-icons/                 app icons
+icon-*.png, icon.svg   app icons
 ```
 
 ## Safety

@@ -1,6 +1,6 @@
 /* Ghost Riders Gym: offline support. Bump VERSION when you change any file. */
-const VERSION = "grg-v1";
-const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-180.png", "icons/icon-32.png"];
+const VERSION = "grg-v2";
+const CORE = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "icon-180.png", "icon-32.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
