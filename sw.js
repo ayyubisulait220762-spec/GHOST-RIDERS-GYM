@@ -1,5 +1,5 @@
 /* Ghost Riders Gym: offline support. Bump VERSION when you change any file. */
-const VERSION = "grg-v3";
+const VERSION = "grg-v4";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "icon-180.png", "icon-32.png"];
 
 self.addEventListener("install", e => {

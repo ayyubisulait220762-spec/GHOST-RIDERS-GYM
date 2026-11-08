@@ -39,6 +39,9 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+html,body{overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none}
+main{overflow-x:clip}
+#screen{touch-action:pan-y;transform-origin:50% 120%}
 button,input{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
@@ -72,8 +75,8 @@ main{padding-block:8px calc(var(--dh,150px) + 8px)}
 .in-r{animation:inR .26s cubic-bezier(.2,.8,.2,1)}
 .in-l{animation:inL .26s cubic-bezier(.2,.8,.2,1)}
 .in-f{animation:inF .22s ease-out}
-@keyframes inR{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
-@keyframes inL{from{transform:translateX(-30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes inR{from{transform:translateX(56px);opacity:0}to{transform:none;opacity:1}}
+@keyframes inL{from{transform:translateX(-56px);opacity:0}to{transform:none;opacity:1}}
 @keyframes inF{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.in-r,.in-l,.in-f{animation:none}}
 
@@ -690,7 +693,7 @@ function render(){
  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===tab));
  $("navrow").hidden=tab!=="work"||!DAYS[day].sl.length;
  const sc=$("screen");
- sc.className="";void sc.offsetWidth;sc.className=dirn==="r"?"in-r":dirn==="l"?"in-l":"in-f";dirn="f";
+ sc.style.transition="";sc.style.transform="";sc.style.opacity="";sc.className="";void sc.offsetWidth;sc.className=dirn==="r"?"in-r":dirn==="l"?"in-l":"in-f";dirn="f";
  if(tab==="week")return weekView(sc);
  if(tab==="prog")return progView(sc);
  if(tab==="guide")return guideView(sc);
@@ -1019,9 +1022,34 @@ $("prev").onclick=()=>{if(idx>0){SFX.tap();dirn="l";idx--;render();scrollTo({top
 $("next").onclick=()=>{SFX.tap();dirn="r";idx++;render();scrollTo({top:0,behavior:"smooth"})};
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{SFX.tap();tab=b.dataset.t;render();scrollTo(0,0)});
 $("sndBtn").onclick=()=>{ST8.snd=ST8.snd?0:1;save();sndIcon();if(ST8.snd){ac();SFX.set()}else try{speechSynthesis.cancel()}catch(e){}};
-let tx=0,ty=0;
-$("screen").addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
-$("screen").addEventListener("touchend",e=>{if(tab!=="work"||guided||warm)return;if(e.target.closest("input,.tbl"))return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0&&!$("next").disabled)$("next").click();else if(dx>0&&!$("prev").disabled)$("prev").click()}},{passive:true});
+/* swipe: the card follows your finger, then slides out; the page itself never moves sideways */
+let sw=null;
+const scr=$("screen");
+const swClear=()=>{scr.style.transition="";scr.style.transform="";scr.style.opacity=""};
+scr.addEventListener("touchstart",e=>{
+ if(tab!=="work"||guided||warm||e.touches.length>1||e.target.closest("input,.tbl,.sheet,.sets,.timer")){sw=null;return}
+ sw={x:e.touches[0].clientX,y:e.touches[0].clientY,dx:0,lock:null};scr.style.transition="none";
+},{passive:true});
+scr.addEventListener("touchmove",e=>{
+ if(!sw)return;const t=e.touches[0],dx=t.clientX-sw.x,dy=t.clientY-sw.y;
+ if(!sw.lock&&Math.abs(dx)+Math.abs(dy)>10)sw.lock=Math.abs(dx)>Math.abs(dy)*1.2?"h":"v";
+ if(sw.lock!=="h")return;
+ const can=dx<0?!$("next").disabled:!$("prev").disabled;
+ sw.dx=can?dx:dx*.25;
+ scr.style.transform=`translateX(${sw.dx}px) rotate(${sw.dx/80}deg)`;scr.style.opacity=String(Math.max(.35,1-Math.abs(sw.dx)/innerWidth));
+},{passive:true});
+const swEnd=()=>{
+ if(!sw)return;const s=sw;sw=null;
+ if(s.lock!=="h"){swClear();return}
+ const W=innerWidth,go=Math.abs(s.dx)>W*.2&&(s.dx<0?!$("next").disabled:!$("prev").disabled);
+ if(go){
+  scr.style.transition="transform .16s ease-in, opacity .16s ease-in";
+  scr.style.transform=`translateX(${s.dx<0?-W:W}px) rotate(${s.dx<0?-6:6}deg)`;scr.style.opacity="0";
+  setTimeout(()=>{swClear();(s.dx<0?$("next"):$("prev")).click()},150);
+ }else{scr.style.transition="transform .25s cubic-bezier(.2,.8,.2,1), opacity .25s";scr.style.transform="";scr.style.opacity="";setTimeout(swClear,260)}
+};
+scr.addEventListener("touchend",swEnd,{passive:true});
+scr.addEventListener("touchcancel",swEnd,{passive:true});
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&(rest||guided||warm))keepAwake(true)});
 const measure=()=>{const r=document.documentElement.style;r.setProperty("--hh",document.querySelector("header").offsetHeight+"px");r.setProperty("--dh",document.querySelector(".dock").offsetHeight+"px")};
 if(window.ResizeObserver){const ro=new ResizeObserver(measure);ro.observe(document.querySelector("header"));ro.observe(document.querySelector(".dock"))}
