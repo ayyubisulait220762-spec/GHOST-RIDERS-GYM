@@ -327,6 +327,17 @@ td button small{display:inline-block;font-size:.66rem;font-weight:700;padding:0 
 .cmpi img{width:100%;border-radius:10px;display:block;max-height:70vh;object-fit:contain;background:#111}
 .cmpi figcaption{font-size:.8rem;text-align:center;margin-top:4px}
 .cmp p{margin:0;font-weight:700}
+.gympop{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:20px max(16px,env(safe-area-inset-left,0px));animation:inF .25s ease-out}
+.gpc{background:var(--panel);border:2px solid var(--pc);border-radius:20px;padding:22px 18px;text-align:center;max-width:340px;width:100%;display:grid;gap:8px;box-shadow:0 0 0 6px color-mix(in srgb,var(--pc) 20%,transparent)}
+.gpi{font-size:3rem;line-height:1;animation:pop .5s ease-out}
+.gpc h2{font-family:var(--display);font-weight:900;font-size:1.9rem;text-transform:uppercase;margin:0;line-height:1;color:var(--pc)}
+.gpc p{margin:0 0 6px;color:var(--muted)}
+.gpc .btn{padding:12px}
+.ntfy{margin-top:10px;font-size:.86rem}
+.ntfy summary{cursor:pointer;font-weight:700;color:var(--accent)}
+.nsteps{margin:8px 0;padding-left:20px;display:grid;gap:6px}
+.topic{display:flex;gap:6px;align-items:center;margin-top:4px;flex-wrap:wrap}
+.topic code{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:.82rem;user-select:all;overflow-wrap:anywhere;min-width:0}
 </style>
 </head>
 <body>
@@ -1129,7 +1140,7 @@ function alerts(){
   if(seen!==undefined&&mb>seen&&mb>myb){toast(`${mate} beat your ${LIB[k].n} record: ${mb} kg`);say(`${mate} just beat your ${LIB[k].n} record.`)}
   ST8.seen.pr[k]=mb}
  const ch=ST8.remote.check?.[mate]?.t;
- if(ch&&ch>(ST8.seen.check||0)&&Date.now()-ch<3*3600e3){toast(`${mate} is at the gym 💪`);ST8.seen.check=ch}
+ if(ch&&ch>(ST8.seen.check||0)&&Date.now()-ch<3*3600e3){ST8.seen.check=ch;gymPop(mate,ch)}
 }
 function syncLabel(){if(syncOK===false)return "Offline · will sync later";const t=ST8.remote?.t;if(!t)return "Connecting…";const m=Math.round((Date.now()-t)/60000);return m<1?"Synced just now":`Synced ${m} min ago`}
 
@@ -1181,7 +1192,8 @@ function duoView(sc,quiet){
   <p class="muted" style="margin:8px 0 0;font-size:.8rem">10 points a set · 50 for finishing a whole day · 25 for a new personal record.</p></div>
  <div class="stats"><div class="stat"><b>🤝 ${bs}</b><span>buddy streak</span></div><div class="stat"><b>${tt.sets}</b><span>sets together</span></div><div class="stat"><b>${tt.days}</b><span>gym days together</span></div></div>
  <div class="box"><h3>Gym check-in</h3><p class="muted" style="margin:0 0 8px">${mateCheck?`${mate} checked in ${ago(mateCheck)}.`:`${mate} hasn't checked in yet.`}${myCheck?` You checked in ${ago(myCheck)}.`:""}</p>
-  <a class="btn pri wa" id="checkIn" href="https://wa.me/?text=${encodeURIComponent(`I'm at the gym 💪 Where are you, ${mate}? ${APP_URL}`)}" target="_blank" rel="noopener">I'm at the gym · tell ${mate}</a></div>
+  <button class="btn pri wa" id="checkIn">💪 I'm at the gym</button>
+  <details class="ntfy"><summary>Get a phone notification even when the app is closed</summary>${ntfyHelp()}</details></div>
  <div class="box"><h3>Weekly bet</h3>
   ${lbet&&lastWin?`<p class="betres">Last week ${nm(lastWin)} won ${Math.max(LA.pts,LB.pts)}–${Math.min(LA.pts,LB.pts)}. ${nm(loser)} pays: <b>${esc(lbet)}</b></p>`:lbet?`<p class="muted">Last week was a tie. Nobody pays.</p>`:""}
   <div class="wrow"><input id="betIn" type="text" maxlength="60" placeholder="e.g. Loser buys protein shakes" value="${esc(bet)}" aria-label="This week's bet"><button class="btn pri" id="betSave">Save</button></div>
@@ -1191,7 +1203,7 @@ function duoView(sc,quiet){
  <div class="box"><h3>Transformation race</h3>${raceChart(me,mate)}</div>
  <div class="box"><h3>Team milestones</h3><div class="mss">${miles}</div></div></div>`;
  $("betSave").onclick=async()=>{const v=$("betIn").value.trim();try{await api(`/bets/${ws}`,"PUT",{text:v,by:me,t:Date.now()});(ST8.remote.bets??={})[ws]={text:v};SFX.set();toast("Bet saved")}catch(e){toast("No internet. Try again.")}};
- $("checkIn").onclick=()=>{api(`/check/${me}`,"PUT",{t:Date.now()}).then(()=>{(ST8.remote.check??={})[me]={t:Date.now()}}).catch(()=>{});SFX.set()};
+ $("checkIn").onclick=checkIn;bindNtfy();
  if(!quiet)pull();
 }
 function raceChart(me,mate){
@@ -1210,6 +1222,45 @@ function raceChart(me,mate){
   ${line(A,PCOL[me])}${line(B,PCOL[mate])}</svg></div>
   <div class="leg"><span style="--pc:var(${PCOL[me]})">${me} ${A.length?fmt(la):"–"}</span><span style="--pc:var(${PCOL[mate]})">${mate} ${B.length?fmt(lb):"–"}</span></div>
   <p class="muted" style="margin:4px 0 0;font-size:.82rem">${lead?`${nm(lead)} has lost more so far.`:"Lower line means more weight lost."}</p>`;
+}
+
+
+/* gym check-in: one tap saves it for the buddy's app and sends a phone notification through ntfy */
+const NTFY="https://ntfy.sh/",topicOf=n=>`grg-YHSSlWYK9ZGHFj-${n.toLowerCase()}`;
+function notifyPhone(to,title,msg){
+ const q=new URLSearchParams({title,tags:"muscle",priority:"high",click:APP_URL});
+ return fetch(`${NTFY}${topicOf(to)}?${q}`,{method:"POST",body:msg}).then(r=>r.ok)}
+let checkBusy=false;
+async function checkIn(){
+ if(!ST8.me||checkBusy)return;checkBusy=true;const me=ME(),mate=MATE(),t=Date.now(),b=$("checkIn");
+ if(b){b.disabled=true;b.textContent="Sending…"}
+ ac();SFX.set();if(navigator.vibrate)try{navigator.vibrate(40)}catch(e){}
+ const tm=new Date(t).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"});
+ const r=await Promise.allSettled([api(`/check/${me}`,"PUT",{t}),notifyPhone(mate,`${me} reached the gym 💪`,`${me} checked in at ${tm}. Where are you?`)]);
+ const ok=r.some(x=>x.status==="fulfilled"&&x.value!==false);
+ if(ok){(ST8.remote.check??={})[me]={t};toast(`${mate} has been told 💪`);say(`${mate} has been told.`)}else toast("No internet. Try again.");
+ checkBusy=false;if(tab==="duo")duoView($("screen"),true);
+}
+function gymPop(who,t){
+ document.querySelector(".gympop")?.remove();
+ ac();SFX.win();say(`${who} reached the gym.`);if(navigator.vibrate)try{navigator.vibrate([80,60,80,60,160])}catch(e){}
+ const o=document.createElement("div");o.className="gympop";o.setAttribute("role","alertdialog");
+ const tm=new Date(t).toLocaleTimeString("en-IN",{hour:"numeric",minute:"2-digit"});
+ o.innerHTML=`<div class="gpc" style="--pc:var(${PCOL[who]})"><div class="gpi">💪</div><h2>${who} reached the gym</h2><p>Checked in at ${tm}. Don't keep him waiting.</p>
+  <button class="btn pri" id="gpOn">I'm coming</button><button class="btn" id="gpX">Close</button></div>`;
+ document.body.appendChild(o);
+ $("gpX").onclick=()=>o.remove();
+ $("gpOn").onclick=()=>{o.remove();if(ST8.me)notifyPhone(who,`${ME()} is on the way 🏃`,`${ME()} saw your check-in and is coming.`).catch(()=>{});toast(`${who} has been told you're coming`)};
+}
+function ntfyHelp(){const me=ME()||"you";return `<ol class="nsteps">
+ <li>Install <b>ntfy</b> from the Play Store (free, no account).</li>
+ <li>Open it, tap <b>+</b>, and type this channel name:<div class="topic"><code id="ntTopic">${topicOf(me)}</code><button class="btn" id="ntCopy">Copy</button></div></li>
+ <li>Tap <b>Subscribe</b>. Then tap the button below to test it.</li></ol>
+ <button class="btn" id="ntTest">Send me a test notification</button>
+ <p class="muted" style="margin:6px 0 0;font-size:.78rem">This channel is only for ${me}. ${MATE()||"Your buddy"} sets up his own name on his phone.</p>`}
+function bindNtfy(){
+ const c=$("ntCopy");if(c)c.onclick=()=>{const t=$("ntTopic").textContent;navigator.clipboard?.writeText(t).then(()=>toast("Copied"),()=>{getSelection().selectAllChildren($("ntTopic"));toast("Select and copy the name")})};
+ const t=$("ntTest");if(t)t.onclick=async()=>{try{const ok=await notifyPhone(ME(),"Ghost Riders Gym ✅","Notifications are working. You'll know when your buddy reaches the gym.");toast(ok?"Test sent. Check your phone.":"Couldn't send. Try again.")}catch(e){toast("No internet. Try again.")}};
 }
 
 /* first open: who is this phone? */
@@ -1310,7 +1361,7 @@ if(window.ResizeObserver){const ro=new ResizeObserver(measure);ro.observe(docume
 addEventListener("resize",()=>{measure();fitName()});
 render();measure();
 if(!ST8.me)welcome();else{pull();}
-setInterval(()=>{if(document.visibilityState==="visible")pull()},40000);
+setInterval(()=>{if(document.visibilityState==="visible")pull()},20000);
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")pull()});
 if("serviceWorker" in navigator&&location.protocol==="https:"&&!/claude\.(ai|site)|claudeusercontent/.test(location.hostname)){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 </script>
