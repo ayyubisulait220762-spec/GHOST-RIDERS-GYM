@@ -1365,5 +1365,43 @@ setInterval(()=>{if(document.visibilityState==="visible")pull()},20000);
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")pull()});
 if("serviceWorker" in navigator&&location.protocol==="https:"&&!/claude\.(ai|site)|claudeusercontent/.test(location.hostname)){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 </script>
+<script src="motion.js"></script>
+<script>
+/* ===== Motion polish (motion.dev) =====
+   Springy animations on top of the app. If motion.js does not load, or the phone
+   has "reduce motion" on, the app works exactly as before. */
+(()=>{
+ const M=window.Motion;if(!M||matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const {animate,stagger}=M,SPRING={type:"spring",stiffness:420,damping:16};
+ const sc=document.getElementById("screen");
+ let chipTap=false;
+ document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".chip"))chipTap=true},true);
+
+ // 1. Every screen: cards rise in one after another
+ const blocks=()=>{let k=[...sc.children];if(k.length===1&&k[0].children.length>1)k=[...k[0].children];return k.slice(0,10)};
+ const r0=window.render;
+ window.render=function(){
+  r0.apply(this,arguments);
+  const k=blocks();if(k.length)animate(k,{opacity:[0,1],y:[18,0]},{delay:stagger(.05),duration:.38,ease:[.2,.8,.2,1]});
+  if(chipTap){chipTap=false;const c=document.querySelector('.chip[aria-pressed="true"]');if(c)animate(c,{scale:[.8,1]},SPRING)}
+ };
+
+ // 2. Ticking a set: the button bounces and the progress ring pulses
+ const t0=window.toggleSet;
+ window.toggleSet=function(k){
+  const out=t0.apply(this,arguments);
+  const b=document.querySelector(`.set[data-w="me"][data-s="${k}"]`);
+  if(b&&b.classList.contains("on")){animate(b,{scale:[.75,1]},SPRING);const r=document.querySelector(".ring");if(r)animate(r,{scale:[1,1.25,1]},{duration:.45})}
+  return out;
+ };
+
+ // 3. Toasts ("Saved 40 kg", "NEW PR!") spring up from the bottom
+ const s0=window.toast;
+ window.toast=function(){
+  s0.apply(this,arguments);
+  const d=document.querySelector(".toast");if(d){d.style.animation="none";animate(d,{x:"-50%",y:[30,0],scale:[.85,1],opacity:[0,1]},SPRING)}
+ };
+})();
+</script>
 </body>
 </html>
