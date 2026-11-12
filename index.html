@@ -23,7 +23,7 @@
 :root{
   --bg:#0e1013; --panel:#171a1f; --panel2:#1e2228; --stage:#13161a; --ink:#eef1f4; --muted:#949daa; --line:#2a3038;
   --fig:#e9edf1; --prop:#3a414b; --plate:#7d8794; --accent:#f2c200; --good:#3fbf6f;
-  --chest:#f0574b; --back:#5b93f0; --legs:#3fbf6f; --shoulders:#e6b52a; --triceps:#f08a3e; --biceps:#a47be6;
+  --chest:#f0574b; --back:#5b93f0; --legs:#3fbf6f; --shoulders:#e6b52a; --triceps:#f08a3e; --biceps:#a47be6; --forearms:#2fb8b0; --calves:#e85d9a; --abs:#a6d92e;
   --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --body:"Barlow","Segoe UI",Roboto,system-ui,sans-serif;
   color-scheme:dark;
@@ -31,11 +31,11 @@
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
   --bg:#eceef1; --panel:#ffffff; --panel2:#f3f5f7; --stage:#f6f7f9; --ink:#14171b; --muted:#59616b; --line:#d6dae0;
   --fig:#1f242b; --prop:#bcc3cc; --plate:#3a414a; --accent:#d9a400; --good:#1f8a49;
-  --chest:#d63a2f; --back:#2563c9; --legs:#22894a; --shoulders:#b98700; --triceps:#d0601a; --biceps:#7b4bc4; color-scheme:light}}
+  --chest:#d63a2f; --back:#2563c9; --legs:#22894a; --shoulders:#b98700; --triceps:#d0601a; --biceps:#7b4bc4; --forearms:#16857f; --calves:#c2366f; --abs:#5f8f0a; color-scheme:light}}
 :root[data-theme="light"]{
   --bg:#eceef1; --panel:#ffffff; --panel2:#f3f5f7; --stage:#f6f7f9; --ink:#14171b; --muted:#59616b; --line:#d6dae0;
   --fig:#1f242b; --prop:#bcc3cc; --plate:#3a414a; --accent:#d9a400; --good:#1f8a49;
-  --chest:#d63a2f; --back:#2563c9; --legs:#22894a; --shoulders:#b98700; --triceps:#d0601a; --biceps:#7b4bc4; color-scheme:light}
+  --chest:#d63a2f; --back:#2563c9; --legs:#22894a; --shoulders:#b98700; --triceps:#d0601a; --biceps:#7b4bc4; --forearms:#16857f; --calves:#c2366f; --abs:#5f8f0a; color-scheme:light}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
@@ -264,6 +264,17 @@ td button small{display:inline-block;font-size:.66rem;font-weight:700;padding:0 
 .cbl{stroke:var(--muted);stroke-width:1.3;fill:none}
 .floor{stroke:var(--line);stroke-width:2}
 .shadow{fill:#000;opacity:.28}
+.sk{fill:url(#gSkin);stroke:#7a4a2c;stroke-width:.5;stroke-opacity:.5;stroke-linejoin:round}
+.skf{fill:url(#gSkinF)}
+.sh{fill:url(#gTee);stroke:#6b7380;stroke-width:.7;stroke-opacity:.7;stroke-linejoin:round}
+.shf{fill:#1a1d22}
+.so{fill:url(#gShort);stroke:#5a616c;stroke-width:.6;stroke-opacity:.6;stroke-linejoin:round}
+.sof{fill:#121418}
+.seam{stroke:#0c0d10;opacity:.6}
+.hair{fill:#17110d}.beard{fill:#17110d;opacity:.85}.brow{stroke:#17110d;stroke-linecap:round}.eye{fill:#17110d}.ear{fill:#b77a52}
+.shoe{fill:#f3f4f6;stroke:#9aa1ab;stroke-width:.5}.shoef{fill:#a9adb4}.sole{stroke:#c7ccd3}
+.pdk{fill:var(--prop);stroke:var(--stage);stroke-width:1}
+.tbl td.nil{color:var(--muted);text-align:center}
 :root[data-theme="light"] .shadow{opacity:.12}
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .shadow{opacity:.12}}
 
@@ -378,7 +389,7 @@ const add=(a,b)=>[a[0]+b[0],a[1]+b[1]], mul=(v,k)=>[v[0]*k,v[1]*k], sub=(a,b)=>[
 const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
 
 /* ===== muscle groups and anatomy ===== */
-const G={legs:["Legs","--legs"],chest:["Chest","--chest"],back:["Back","--back"],shoulders:["Shoulders","--shoulders"],triceps:["Triceps","--triceps"],biceps:["Biceps","--biceps"]};
+const G={legs:["Legs","--legs"],chest:["Chest","--chest"],back:["Back","--back"],shoulders:["Shoulders","--shoulders"],triceps:["Triceps","--triceps"],biceps:["Biceps","--biceps"],forearms:["Forearms","--forearms"],calves:["Calves","--calves"],abs:["Abs","--abs"]};
 const MUS={
  pec:["Chest","Pectoralis major","Pushes your arms forward and across your body."],
  upec:["Upper chest","Clavicular pectoralis","Top part of the chest. Fills the area under the collarbone."],
@@ -398,7 +409,11 @@ const MUS={
  quads:["Front thigh","Quadriceps","Straightens your knee."],
  hams:["Back thigh","Hamstrings","Bends your knee and pulls your hips forward."],
  glutes:["Glutes","Gluteus maximus","Biggest muscle in your body. Drives your hips."],
- core:["Core","Rectus abdominis","Keeps your body tight and stable."]
+ core:["Core","Rectus abdominis","Keeps your body tight and stable."],
+ obl:["Side abs","Obliques","Twist and bend your waist. Tighten the sides."],
+ flex:["Inner forearm","Wrist flexors","Curl your wrist and give you a strong grip."],
+ ext:["Outer forearm","Wrist extensors","Lift the back of your hand. Balance the forearm and protect the elbow."],
+ calf:["Calves","Gastrocnemius & soleus","Push you up on your toes. Shape the lower leg."]
 };
 
 /* ===== props (gym equipment drawings) ===== */
@@ -426,7 +441,17 @@ const P={
  tower:L(156,4,156,199,5)+L(134,8,156,8,4),
  towerR:L(200,4,200,199,5),
  towers:L(12,8,12,199,5)+L(208,8,208,199,5),
- lowcable:L(176,120,176,199,5)
+ lowcable:L(176,120,176,199,5),
+ cpress:RC(56,138,46,8)+L(64,138,58,62,9)+L(80,146,80,199,4)+L(172,24,172,199,6)+L(44,199,184,199,3),
+ preach:RC(48,142,44,8)+L(70,150,70,199,4)+L(84,98,104,112,9)+L(96,108,96,199,4)+L(40,199,140,199,3),
+ hack:L(112,196,146,186,6)+L(150,186,150,199,4)+L(30,199,170,199,3),
+ calfm:L(160,10,160,199,6)+RC(94,193,40,7)+L(146,199,174,199,3),
+ captain:L(76,20,76,199,5)+RC(80,50,6,66)+L(92,93,130,93,7)+L(68,199,140,199,3),
+ ctower:L(118,4,118,199,5)+L(98,8,120,8,4),
+ towerL:L(18,4,18,199,5),
+ wrist:bench(48,163,44)+L(176,120,176,199,5),
+ wristb:bench(48,163,44),
+ dipbarH:RC(96,105,30,5)+L(122,110,122,199,4)+L(110,199,134,199,3)
 };
 const ST={ax:108,ay:194,th:0,sh:0,t:180,ua:0,fa:0};
 const FLAT={hx:72,hy:141,t:90,F:-1,ft:[34,193],fo:-90};
@@ -477,6 +502,33 @@ const LIB={
  hammer:X("biceps","Dumbbell Hammer Curl",["Hold dumbbells with palms facing each other.","Curl up, thumbs on top.","Lower slowly."],"Angootha upar, dheere neeche.",["brach","brrad","bi"],{...ST,ua:2,fa:8},{ua:10,fa:160},["db1"]),
  cablecurl:X("biceps","Cable Curl",["Straight bar on the low pulley.","Curl up to your chest, elbows at your sides.","Lower slowly."],"Upar nichodo, dheere wapas.",["bi"],{...ST,ua:3,fa:16},{ua:12,fa:158},["cable",176,190,"bar"],P.lowcable),
  concentration:X("biceps","Concentration Curl",["Sit, elbow resting on the inside of your thigh.","Curl the dumbbell up to your shoulder.","Lower slowly."],"Kohni jaangh pe tiki rahe.",["bi","brach"],{one:1,hx:76,hy:155,t:136,th:88,sh:0,ua:-10,fa:2,fua:24,ffa:70},{fa:168},["db1"],P.conc,{r:{M:"10 each arm"}}),
+ cpressW:X("chest","Machine Chest Press (Wide Grip)",["Sit with your back flat on the pad, handles at chest level.","Take the wide handles, elbows out to the sides.","Push forward until your arms are almost straight, then come back slowly."],"Kandhe peeche aur neeche, kamar pad se chipki.",["pec","fdelt","tri"],{hx:78,hy:136,t:184,ft:[128,193],eh:-125,h:[100,100],ual:.8},{h:[127,96],ual:1},["grip",172,30],P.cpress),
+ cpressC:X("chest","Machine Chest Press (Close Grip)",["Sit with your back flat on the pad.","Take the close (neutral) handles, elbows close to your body.","Push forward, squeeze, and come back slowly."],"Kohni body ke paas, seena aur triceps dono kaam karenge.",["pec","tri","fdelt"],{hx:78,hy:136,t:184,ft:[128,193],eh:-45,h:[100,101],ual:.95},{h:[127,97],ual:1},["grip",172,30],P.cpress),
+ pecdeck:X("chest","Pec Deck Fly",["Sit tall, forearms or hands on the pads at chest height.","Bring the pads together in front of your chest.","Open slowly until you feel a chest stretch."],"Seene se dabao, haath se nahi. Beech mein 1 second ruko.",["pec","fdelt"],{v:"f",seat:1,hx:110,hy:132,th:30,sh:0,ua:92,fa:180,ual:1,fal:1},{ual:.3},["pdeck"],P.seat,{note:"Front view"}),
+ spressW:X("shoulders","Machine Shoulder Press (Wide Grip)",["Sit with your back on the pad, wide handles at shoulder level.","Press up until your arms are almost straight.","Lower slowly back to shoulder level."],"Kamar pad se lagi rahe, kohni lock mat karo.",["fdelt","sdelt","tri"],{v:"f",seat:1,hx:110,hy:132,th:30,sh:0,ua:100,fa:180},{ua:160,fa:175},["mgrip"],P.seat),
+ spressC:X("shoulders","Machine Shoulder Press (Close Grip)",["Sit with your back on the pad, close (neutral) handles in front of your shoulders.","Press straight up, elbows pointing forward.","Lower slowly."],"Kohni aage ki taraf, front shoulder pe zor.",["fdelt","tri","sdelt"],{v:"f",seat:1,hx:110,hy:132,th:30,sh:0,ua:30,fa:175},{ua:165,fa:195},["mgrip"],P.seat),
+ cablelat:X("shoulders","Cable Lateral Raise",["Stand between the low pulleys, handles crossed in front of you.","Raise your arms out to the sides up to shoulder height.","Lower slowly. Keep it light."],"Kohni se uthao, kandhe kaan se door.",["sdelt","traps"],{v:"f",hx:110,hy:122,th:3,sh:0,ua:8,fa:5},{ua:88,fa:95},["cable2",206,192,14,192],P.towers),
+ revpec:X("shoulders","Reverse Pec Deck",["Sit facing the pad, arms straight in front at shoulder height.","Open your arms out wide to the sides.","Squeeze the back of your shoulders, return slowly."],"Haath seedhe, peeche kandhe ki haddi milao.",["rdelt","rhom"],{v:"f",seat:1,hx:110,hy:132,th:30,sh:0,ua:90,fa:90,ual:.3},{ual:1},[],P.seat,{note:"Facing the machine"}),
+ cgpull:X("back","Close-Grip Pulldown",["Use the V-handle, thighs under the pad.","Pull the handle down to your upper chest.","Let it go up slowly until your arms are straight."],"Kohni neeche aur peeche, seena upar.",["lats","bi","rhom"],{hx:96,hy:155,t:194,ft:[136,193],h:[100,52],ual:1},{h:[100,104],ual:.85},["cable",96,6],P.pull),
+ hack:X("legs","Hack Squat",["Back flat on the pad, shoulders under the pads, feet shoulder-width on the plate.","Bend your knees and go down until thighs are level.","Push up through your heels. Don't lock your knees."],"Kamar pad se chipki, ghutne toes ki direction mein.",["quads","glutes"],{ax:120,ay:190,sh:6,th:10,t:192,hr:[4,2]},{sh:-30,th:88},["hack"],P.hack,{down:1}),
+ legcurl:X("legs","Seated Leg Curl",["Sit on the machine, pad behind your ankles, thigh pad locked down.","Curl your heels down and back under the seat.","Come back up slowly."],"Hamstring se kheencho, hips seat se uthne mat do.",["hams"],{hx:86,hy:146,t:186,th:90,sh:88,h:[98,149]},{sh:2},["pad",1],P.legext),
+ tridips:X("triceps","Triceps Dips",["Grip the dip bars, body straight up and down.","Bend your elbows and lower until they're at 90°.","Push back up until your arms are straight."],"Body seedha rakho, aage mat jhuko.",["tri","pec","fdelt"],{hx:100,hy:100,t:178,th:18,sh:-55,eh:-90,h:[108,105]},{hy:124},[],P.dipbarH,{down:1,r:{H:"6–10 (add weight when easy)"}}),
+ ohcable:X("triceps","Overhead Cable Extension",["Rope on the low pulley, turn away from the machine.","Hands behind your head, elbows pointing up.","Straighten your arms forward and up, then bend back slowly."],"Kohni ek jagah, sirf forearm hile.",["trilong","tri"],{...ST,t:168,ua:160,fa:-25},{fa:160},["cable",18,96],P.towerL),
+ sbpush:X("triceps","Straight-Bar Pushdown",["Straight bar on the high pulley, palms down.","Elbows pinned to your sides, push the bar down.","Let it come up to chest level slowly."],"Kohni body se chipki, bar neeche tak.",["tri"],{...ST,t:174,ua:4,fa:138},{fa:8},["cable",136,8,"bar"],P.tower),
+ rgpush:X("triceps","Reverse-Grip Pushdown",["Straight bar on the high pulley, palms facing up.","Elbows pinned to your sides, push the bar down.","Let it come up slowly."],"Ulta grip, weight halka, form perfect.",["tri"],{...ST,t:174,ua:4,fa:138},{fa:8},["cable",136,8,"bar"],P.tower),
+ preacher:X("biceps","Preacher Curl Machine",["Sit, upper arms flat on the pad.","Curl the handles up toward your shoulders.","Lower slowly until your arms are almost straight."],"Neeche poora seedha mat karo, kohni ko bachao.",["bi","brach"],{hx:70,hy:140,t:165,ft:[116,193],ua:55,fa:40},{fa:165},["grip",106,106],P.preach),
+ cwrist:X("forearms","Cable Wrist Curl",["Sit on a bench at the low pulley, forearms on your thighs, palms up.","Let the bar roll down to your fingers.","Curl your wrists up as high as you can."],"Sirf kalai hile, forearm jaangh pe tika rahe.",["flex"],{hx:70,hy:158,t:152,ft:[110,193],h:[120,152],eh:0,wa:-55},{wa:45},["cable",176,192],P.wrist,{r:{P:"15–20"}}),
+ bbwrist:X("forearms","Barbell Wrist Curl",["Sit, forearms on your thighs, palms up, wrists past your knees.","Lower the bar slowly with your wrists.","Curl it back up and squeeze."],"Halka weight, poori range.",["flex"],{hx:70,hy:158,t:152,ft:[110,193],h:[120,152],eh:0,wa:-55},{wa:45},["ez"],P.wristb,{r:{P:"15–20"}}),
+ revwrist:X("forearms","Reverse Wrist Curl",["Sit, forearms on your thighs, palms facing down.","Lower the weight with your wrists.","Lift the back of your hands up as high as you can."],"Weight bahut halka, jhatka bilkul nahi.",["ext","brrad"],{hx:70,hy:158,t:152,ft:[110,193],h:[120,152],eh:0,wa:-45},{wa:35},["db1"],P.wristb,{r:{P:"15–20"}}),
+ smithwrist:X("forearms","Behind-the-Back Smith Wrist Curl",["Stand with your back to the Smith bar, hold it behind you, palms facing back.","Let the bar roll down to your fingers.","Curl your wrists up and squeeze."],"Haath seedhe, sirf kalai upar.",["flex"],{...ST,ua:-8,fa:-8,wa:15},{wa:-75},["bb"],P.smithS,{r:{P:"15–20"}}),
+ cablerevcurl:X("forearms","Cable Reverse Curl",["Straight bar on the low pulley, palms facing down.","Curl up to your chest, elbows at your sides.","Lower slowly."],"Ulta grip, kalai seedhi rakho.",["brrad","ext"],{...ST,ua:3,fa:16},{ua:12,fa:158},["cable",176,190,"bar"],P.lowcable),
+ farmshrug:X("forearms","Farmer's Hold Shrugs",["Pick up heavy dumbbells and stand tall.","Grip as hard as you can and shrug your shoulders up.","Lower slowly. Don't let the grip open."],"Muthi kas ke pakdo, kandhe kaan tak.",["flex","traps"],{...ST,ua:0,fa:0,shr:0},{shr:5},["db1"],"",{r:{P:"15–20 (heavy)"}}),
+ calfm:X("calves","Standing Calf Raise",["Shoulders under the pads, balls of your feet on the step.","Let your heels drop for a full stretch.","Rise up on your toes as high as you can. Hold 1 second."],"Neeche poora stretch, upar 1 second ruko.",["calf"],{...ST,ax:110,ay:189,fo:90,hr:[0,8]},{ay:180,fo:34},["calfpad",160],P.calfm,{r:{P:"15–20"}}),
+ lpcalf:X("calves","Leg Press Calf Raise",["Sit in the leg press, legs almost straight, balls of your feet on the bottom of the plate.","Let the plate come toward you to stretch your calves.","Push with your toes as far as you can."],"Ghutne thode se mude, sirf pair ka panja chale.",["calf"],{hx:80,hy:152,t:-128,ft:[133,105],fo:-140,h:[84,156]},{ft:[136,102],fo:-170},["lp"],P.legpress,{r:{P:"15–20"}}),
+ smithcalf:X("calves","Smith Machine Calf Raise",["Bar on your upper back, stand tall under the Smith bar.","Rise up on your toes as high as you can.","Lower your heels slowly."],"Ghutne seedhe, upar 1 second ruko.",["calf"],{ax:104,ay:194,sh:0,th:0,t:180,bx:106,hr:[3,-6],fo:90},{ay:185,fo:36},["bb"],P.smithS,{r:{P:"15–20"}}),
+ kneeraise:X("abs","Knee Raise (Captain's Chair)",["Back on the pad, forearms on the arm pads, legs hanging.","Pull your knees up to your chest.","Lower slowly. Don't swing."],"Jhool mat, pet se ghutne upar kheencho.",["core","obl"],{hx:96,hy:112,t:180,th:0,sh:2,ua:0,fa:90},{th:100,sh:14},[],P.captain,{r:{P:"12–15"}}),
+ cablecrunch:X("abs","Kneeling Cable Crunch",["Kneel under the high pulley, rope at your forehead.","Curl your chest down toward your knees.","Come back up slowly. Hips stay still."],"Pet se mudo, haath se mat kheencho.",["core"],{hx:92,hy:160,t:172,th:2,sh:-90,hr:[14,8]},{t:112},["cable",104,10],P.ctower,{r:{P:"12–15"}}),
+ woodchop:X("abs","Cable Woodchop",["High pulley on one side, hold the handle with both hands.","Pull it down and across your body to the opposite hip.","Come back slowly. Do both sides."],"Body ghumao core se, haath seedhe.",["obl","core"],{...ST,ua:200,fa:200},{ua:35,fa:35,t:176},["cable",24,14],P.towerL,{r:{P:"12 each side"}}),
  ropehammer:X("biceps","Rope Cable Hammer Curl",["Rope on the low pulley.","Curl up with palms facing each other.","Lower slowly."],"Rope ko upar tak, kohni fixed.",["brach","brrad"],{...ST,ua:3,fa:12},{ua:12,fa:160},["cable",176,190],P.lowcable)
 };
 
@@ -490,20 +542,21 @@ const WARM=[
 ];
 
 /* ===== the plan =====
-   Each muscle every day. Over the week each muscle gets 2 Heavy, 2 Medium, 2 Pump sessions.
-   Each day has 2 Heavy, 2 Medium, 2 Pump exercises, heaviest first. */
+   Plan v2 (from Sat 14 Nov 2026): 8 exercises a day. The 6 main muscles every day, each getting 2 Heavy, 2 Medium, 2 Pump
+   sessions a week; then forearms (every day) and calves (Sat/Mon/Wed) or abs (Sun/Tue/Thu) as pump finishers.
+   34 machine/cable/Smith and 14 free-weight exercises a week (about 70:30). */
 const INT={
  H:{name:"Heavy",reps:"6–8",rest:120,ecc:2.2,con:1.0,eff:"Stop with 2 reps left in the tank"},
  M:{name:"Medium",reps:"8–12",rest:90,ecc:2.0,con:1.0,eff:"Stop with 1–2 reps left"},
  P:{name:"Pump",reps:"12–15",rest:60,ecc:1.6,con:0.8,eff:"Last set close to failure, feel the burn"}
 };
 const DAYS=[
- {wk:"Sat",full:"Saturday",cardio:["15 min incline walk","Treadmill at incline 8–10, brisk pace. No treadmill? Walk outside fast for 20 min."],sl:[["squat","H"],["sdbpress","H"],["incline","M"],["diamond","M"],["pulldown","P"],["cablecurl","P"]]},
- {wk:"Sun",full:"Sunday",cardio:["Cycle intervals","8 rounds: 30 sec fast, 60 sec easy on the cycle. Or skipping rope the same way."],sl:[["row","H"],["bbcurl","H"],["rdl","M"],["arnold","M"],["crossover","P"],["pushdown","P"]]},
- {wk:"Mon",full:"Monday",cardio:["15 min incline walk","Steady pace where you can talk but not sing."],sl:[["bench","H"],["closegrip","H"],["onearm","M"],["inclinecurl","M"],["legext","P"],["lateral","P"]]},
- {wk:"Tue",full:"Tuesday",cardio:["Finisher circuit","3 rounds: 15 bodyweight squats, 10 push-ups, 30 sec plank. Rest 1 min between rounds."],sl:[["smithsquat","H"],["smithpress","H"],["decline","M"],["overhead","M"],["cablerow","P"],["ropehammer","P"]]},
- {wk:"Wed",full:"Wednesday",cardio:["12 min incline walk","Easy pace. Heavy deadlift day, so don't push cardio hard."],sl:[["deadlift","H"],["hammer","H"],["lunges","M"],["facepull","M"],["flyes","P"],["benchdips","P"]]},
- {wk:"Thu",full:"Thursday",cardio:["Cycle intervals","10 rounds: 20 sec fast, 40 sec easy. Last day of the week, finish strong."],sl:[["chestdips","H"],["skull","H"],["tbar","M"],["concentration","M"],["legpress","P"],["reardelt","P"]]},
+ {wk:"Sat",full:"Saturday",cardio:["15 min incline walk","Treadmill at incline 8–10, brisk pace. No treadmill? Walk outside fast for 20 min."],sl:[["squat","H"],["spressW","H"],["cpressW","M"],["bbcurl","M"],["pulldown","P"],["pushdown","P"],["cwrist","P"],["calfm","P"]]},
+ {wk:"Sun",full:"Sunday",cardio:["12 min incline walk","Easy pace. Heavy deadlift day, so don't push cardio hard."],sl:[["deadlift","H"],["skull","H"],["legpress","M"],["preacher","M"],["pecdeck","P"],["cablelat","P"],["cablerevcurl","P"],["kneeraise","P"]]},
+ {wk:"Mon",full:"Monday",cardio:["15 min incline walk","Steady pace where you can talk but not sing."],sl:[["bench","H"],["hammer","H"],["cablerow","M"],["ohcable","M"],["legcurl","P"],["revpec","P"],["bbwrist","P"],["lpcalf","P"]]},
+ {wk:"Tue",full:"Tuesday",cardio:["Finisher circuit","3 rounds: 15 bodyweight squats, 10 push-ups, 30 sec plank. Rest 1 min between rounds."],sl:[["hack","H"],["tridips","H"],["tbar","M"],["cpressC","M"],["spressC","M"],["cablecurl","P"],["revwrist","P"],["cablecrunch","P"]]},
+ {wk:"Wed",full:"Wednesday",cardio:["Cycle intervals","8 rounds: 30 sec fast, 60 sec easy on the cycle. Or skipping rope the same way."],sl:[["row","H"],["incline","H"],["facepull","M"],["legext","P"],["sbpush","P"],["ropehammer","P"],["farmshrug","P"],["smithcalf","P"]]},
+ {wk:"Thu",full:"Thursday",cardio:["Cycle intervals","10 rounds: 20 sec fast, 40 sec easy. Last day of the week, finish strong."],sl:[["smithpress","H"],["inclinecurl","H"],["rdl","M"],["rgpush","M"],["cgpull","P"],["crossover","P"],["smithwrist","P"],["woodchop","P"]]},
  {wk:"Fri",full:"Friday",sl:[]}
 ];
 
@@ -515,6 +568,7 @@ const save=()=>{try{localStorage.setItem(SKEY,JSON.stringify(ST8))}catch(e){}que
 const dk=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 const TODAY=dk(new Date());
 if(!ST8.start){ST8.start=TODAY;save()}
+if((ST8.planV||1)<2){ST8.swap={};if(TODAY<"2026-11-14")ST8.start="2026-11-14";ST8.planV=2;save()}
 const daysBetween=(a,b)=>Math.round((new Date(b+"T12:00")-new Date(a+"T12:00"))/864e5);
 const weekNo=()=>Math.floor(Math.max(0,daysBetween(ST8.start,TODAY))/7)%4+1;
 const nSets=()=>weekNo()===4?2:3;
@@ -600,7 +654,7 @@ function side(p){
   else{knee=add(hip,mul(dir(p.th),38));ank=add(knee,mul(dir(p.sh),36))}}
  let fk,fa;
  if(p.fth!==undefined){fk=add(hip,mul(dir(p.fth),38));fa=add(fk,mul(dir(p.fsh??p.sh),36))}else{fk=knee;fa=ank}
- const sho=add(hip,mul(U,52)),neck=add(sho,mul(U,5)),head=add(sho,add(mul(U,15),mul(fr,1.5)));
+ const sho0=add(hip,mul(U,52)),sho=add(sho0,mul(U,p.shr||0)),neck=add(sho0,mul(U,5)),head=add(sho0,add(mul(U,15),mul(fr,1.5)));
  const UA=28*(p.ual??1);
  let elb,hand,tgt=p.h;
  if(p.hr)tgt=add(sho,add(mul(U,p.hr[0]),mul(fr,p.hr[1])));
@@ -612,14 +666,15 @@ function side(p){
  if(p.fh)[fel,fha]=ik(sho,p.fh,28,26,eh);
  else if(p.fua!==undefined){fel=add(sho,mul(dir(p.fua),28));fha=add(fel,mul(dir(p.ffa??p.fa),26))}
  else{fel=add(elb,[-1.5,-1]);fha=add(hand,[-1.5,-1])}
+ let tip;if(p.wa!==undefined){const v=sub(hand,elb),fa=Math.atan2(v[0],v[1])/RAD;tip=add(hand,mul(dir(fa+p.wa),7))}
  const grounded=p.ax!==undefined||p.ft;
  const fo=p.fo??(grounded?90:p.sh+90*F);
- return{hip,knee,ank,fk,fa,sho,neck,head,elb,hand,fel,fha,U,fr,t,F,fo,fo2:p.fo2??(p.fth!==undefined?fo:fo)};
+ return{hip,knee,ank,fk,fa,sho,neck,head,elb,hand,tip,fel,fha,U,fr,t,F,fo,fo2:p.fo2??(p.fth!==undefined?fo:fo)};
 }
 function front(p){
  const tl=p.tl||52,sy=p.hy-tl;
  const rS=[p.hx+17,sy+2],lS=[p.hx-17,sy+2],rH=[p.hx+9,p.hy],lH=[p.hx-9,p.hy];
- const UA=28*(p.ual??1),FA=26*(p.ual??1),rE=add(rS,mul(dir(p.ua),UA)),lE=add(lS,mul(dir(-p.ua),UA));
+ const UA=28*(p.ual??1),FA=26*(p.fal??p.ual??1),rE=add(rS,mul(dir(p.ua),UA)),lE=add(lS,mul(dir(-p.ua),UA));
  let rK,lK,rA,lA;
  if(p.seat){rK=add(rH,[13,10]);lK=add(lH,[-13,10]);rA=[rK[0]+2,194];lA=[lK[0]-2,194]}
  else{rK=add(rH,mul(dir(p.th),38));lK=add(lH,mul(dir(-p.th),38));rA=add(rK,mul(dir(p.sh),36));lA=add(lK,mul(dir(-p.sh),36))}
@@ -653,87 +708,163 @@ function foot(ank,knee,fo,cls){
 const SPOT={pec:["T",.76,7,12,5.5],upec:["T",.86,6.5,9,5],lpec:["T",.66,7.5,10,5],core:["T",.38,6,11,3.6],
  lats:["T",.56,-6.5,15,5],rhom:["T",.84,-6.5,10,4.5],traps:["T",.95,-5,9,4.5],erec:["T",.26,-6,11,3.6],glutes:["T",.02,-6.5,8,7.5],
  fdelt:["D",2.5],sdelt:["D",0],rdelt:["D",-2.5],bi:["UA",.52,2,9.5,3.8],brach:["UA",.68,1.5,6,3.2],tri:["UA",.5,-2,10,4],trilong:["UA",.38,-2,10,4],
- brrad:["FA",.3,1.5,7,3],quads:["TH",.5,3,15,5],hams:["TH",.52,-3,14,4.6]};
+ brrad:["FA",.3,1.5,7,3],flex:["FA",.35,1.5,8,3],ext:["FA",.35,-1.5,8,3],calf:["SH",.32,2.5,9,4],obl:["T",.4,5,9,3.6],quads:["TH",.5,3,15,5],hams:["TH",.52,-3,14,4.6]};
+/* ===== athlete renderer =====
+   A muscular man in a black tee, black shorts and white shoes. Limbs are drawn as muscle-shaped profiles
+   (biceps, forearm, quad and calf bulges on the right side of each bone), with light-to-dark shading.
+   Working muscles glow in the group colour and get brighter as they squeeze. */
+const ATH_DEFS=`<defs>
+<linearGradient id="gSkin" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="180" y2="210"><stop offset="0" stop-color="#e0a77a"/><stop offset="1" stop-color="#a5683f"/></linearGradient>
+<linearGradient id="gSkinF" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="180" y2="210"><stop offset="0" stop-color="#a87451"/><stop offset="1" stop-color="#6f4429"/></linearGradient>
+<linearGradient id="gTee" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="180" y2="210"><stop offset="0" stop-color="#454b55"/><stop offset="1" stop-color="#1d2026"/></linearGradient>
+<linearGradient id="gShort" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="180" y2="210"><stop offset="0" stop-color="#363b44"/><stop offset="1" stop-color="#15171b"/></linearGradient>
+</defs>`;
+/* body segment with a muscle profile: fw = half-widths on the f side, bw on the other side, sampled evenly from a to b */
+function seg(a,b,fw,bw,f,cls){
+ const u=nrm(sub(b,a));let n=[-u[1],u[0]];if(dot(n,f)<0)n=mul(n,-1);
+ const k=fw.length-1,L=[],R=[];
+ for(let i=0;i<=k;i++){const c=mix(a,b,i/k);L.push(add(c,mul(n,fw[i])));R.push(sub(c,mul(n,bw[i])))}
+ const ce=add(b,mul(u,(fw[k]+bw[k])*.32)),cs=sub(a,mul(u,(fw[0]+bw[0])*.32));
+ return smooth([cs,...L,ce,...R.reverse()],cls)}
+/* part of a segment (t0..t1), e.g. a sleeve or a shorts leg, slightly wider than the limb */
+function cover(a,b,fw,bw,f,t0,t1,pad,cls){
+ const k=fw.length-1,pick=(w,t)=>{const x=t*k,i=Math.min(k-1,Math.floor(x));return w[i]+(w[i+1]-w[i])*(x-i)};
+ const N=4,F=[],B=[];for(let i=0;i<=N;i++){const t=t0+(t1-t0)*i/N;F.push(pick(fw,t)+pad);B.push(pick(bw,t)+pad)}
+ return seg(mix(a,b,t0),mix(a,b,t1),F,B,f,cls)}
+function shoe(ank,knee,fo,cls){
+ const fd=dir(fo);let n=[-fd[1],fd[0]];if(dot(n,sub(knee,ank))>0)n=[-n[0],-n[1]];
+ const P=(x,y)=>add(ank,add(mul(fd,x),mul(n,y)));
+ return smooth([P(-4.5,1),P(-4,-3.5),P(2,-4.5),P(8,-2.5),P(13,1.5),P(12.5,4.2),P(4,4.6),P(-4,4.4)],cls)+ln(P(-4.2,4.3),P(12.6,4.3),1.6,"sole")}
+const PR={
+ thF:[8,9.6,9.8,7.8,5.4],thB:[8.6,8.2,7,5.6,4.8],
+ shB:[4.8,7.4,6.8,4.4,3.1],shF:[4.2,4,3.6,3.1,2.6],
+ uaF:[6.4,7.6,8.2,6.4,4.4],uaB:[6.8,7.4,6.8,5.4,4.4],
+ faF:[4.6,5.4,4.4,3.3,2.8],faB:[4.4,5,4,3.1,2.6]
+};
+const aOf=v=>Math.atan2(v[0],v[1])/RAD;
+function head2(H,U,fr){
+ const hp=(a,b)=>add(H,add(mul(U,a),mul(fr,b))),P=(a,b)=>{const q=hp(a,b);return f1(q[0])+" "+f1(q[1])};
+ return circ(hp(1.6,-1.6),9.6,"hair")+ell(hp(-.6,.9),8.6,9.4,angOf(U)+90,"sk")
+  +`<path class="beard" d="M${P(-.6,-4.4)}Q${P(-10.8,-2)} ${P(-9.4,6.4)}Q${P(-8.6,9.6)} ${P(-5.6,9.4)}L${P(-3,9.6)}Q${P(-2.4,8.4)} ${P(-3.6,7.2)}Q${P(-5.4,2.4)} ${P(-1.4,-1.2)}Z"/>`
+  +circ(hp(.2,9.1),1.7,"sk")+ln(hp(2.6,4),hp(2.8,7),.9,"brow")+circ(hp(1.4,5.8),.8,"eye")+ell(hp(-.2,-2.4),1.5,2.3,angOf(U),"ear")}
+function headF(c){
+ const [x,y]=c,P=(a,b)=>f1(x+a)+" "+f1(y+b);
+ return ell([x,y-1.6],9.8,9.4,0,"hair")+ell([x-8.6,y+1.2],1.8,2.6,0,"ear")+ell([x+8.6,y+1.2],1.8,2.6,0,"ear")+ell([x,y+1],8.4,9.6,0,"sk")
+  +`<path class="beard" d="M${P(-8.3,1)}Q${P(-8,11.2)} ${P(0,11.6)}Q${P(8,11.2)} ${P(8.3,1)}L${P(6.2,2.4)}Q${P(5.4,7.6)} ${P(0,7.9)}Q${P(-5.4,7.6)} ${P(-6.2,2.4)}Z"/>`
+  +ln([x-4.2,y+6.6],[x+4.2,y+6.6],1.4,"brow")+circ([x-3.3,y-.4],.9,"eye")+circ([x+3.3,y-.4],.9,"eye")+ln([x-5,y-2.6],[x-1.6,y-2.9],.9,"brow")+ln([x+5,y-2.6],[x+1.6,y-2.9],.9,"brow")}
 function draw(ex,s,ghost){
- const p=lerpPose(ex.A,ex.B,s),m=ex.m,e=ex.eq||[],mus=ex.mus||[];
+ const p=lerpPose(ex.A,ex.B,s),e=ex.eq||[],mus=ex.mus||[];
  const sq=ex.down?1-s:s; /* how squeezed the muscle is */
- const op=k=>f1((k===0?.78:.42)+sq*(k===0?.22:.12))+`;stroke-width:${f1(1+sq*(k===0?4:2))}`;
+ const op=k=>f1(((k===0?.6:.32)+sq*(k===0?.3:.14)))+`;stroke-width:${f1(1+sq*(k===0?3:1.5))}`;
  let o="";
- if(!ghost){o=ex.pr||"";if(!ex.nofloor)o=`<line class="floor" x1="0" y1="200" x2="220" y2="200"/>`+o}
+ if(!ghost){o=ATH_DEFS+(ex.nofloor?"":`<line class="floor" x1="0" y1="200" x2="220" y2="200"/>`)+(ex.pr||"")}
  if(p.v==="f"){
   const J=front(p);
-  if(!ghost&&!ex.nofloor)o=`<ellipse class="shadow" cx="${p.hx}" cy="200" rx="34" ry="3.5"/>`+o;
   if(ghost)return ln(J.lS,J.lE,7,"gh")+ln(J.lE,J.lHa,6,"gh")+ln(J.rS,J.rE,7,"gh")+ln(J.rE,J.rHa,6,"gh")+ln(J.lH,J.lK,8,"gh")+ln(J.lK,J.lA,7,"gh")+ln(J.rH,J.rK,8,"gh")+ln(J.rK,J.rA,7,"gh");
+  if(!ex.nofloor)o+=`<ellipse class="shadow" cx="${p.hx}" cy="200" rx="34" ry="3.5"/>`;
   if(e[0]==="cable2")o+=ln([e[1],e[2]],J.lHa,1.3,"cbl")+ln([e[3],e[4]],J.rHa,1.3,"cbl")+circ([e[1],e[2]],4.5,"pl")+circ([e[3],e[4]],4.5,"pl");
-  /* legs */
-  o+=limb(J.lH,J.lK,12,8.5,"bd")+limb(J.lK,J.lA,8.5,6,"bd")+limb(J.rH,J.rK,12,8.5,"bd")+limb(J.rK,J.rA,8.5,6,"bd");
-  o+=limb(add(J.lA,[1,2.5]),add(J.lA,[-6,3.5]),6,4.5,"bd")+limb(add(J.rA,[-1,2.5]),add(J.rA,[6,3.5]),6,4.5,"bd");
-  if(mus.includes("quads")){const k=mus.indexOf("quads");o+=`<g class="mh" style="opacity:${(op(k))}">`+limb(J.lH,mix(J.lH,J.lK,.8),9,6,"mf")+limb(J.rH,mix(J.rH,J.rK,.8),9,6,"mf")+`</g>`}
-  /* torso */
-  const sy=J.sy,hx=p.hx,hy=p.hy,tl=J.tl,w=17;
-  o+=smooth([[hx-11,hy+4],[hx-12,hy-tl*.35],[hx-w-2,sy+6],[hx-w+3,sy-1],[hx,sy-3],[hx+w-3,sy-1],[hx+w+2,sy+6],[hx+12,hy-tl*.35],[hx+11,hy+4],[hx,hy+6]],"bd");
-  o+=limb(J.neck,J.head,8,8,"bd")+circ(J.head,9.5,"bd");
-  const spotsF=[];
-  mus.forEach((k,i)=>{
-   const g=`<g class="mh" style="opacity:${(op(i))}">`;
-   if(/pec/.test(k)&&tl>40){const yy=k==="upec"?sy+9:k==="lpec"?sy+15:sy+12;spotsF.push(g+ell([hx-7,yy],7.5,5.5,8,"mf")+ell([hx+7,yy],7.5,5.5,-8,"mf")+`</g>`)}
-   if(k==="lats")spotsF.push(g+ell([hx-12,sy+20],4,11,-10,"mf")+ell([hx+12,sy+20],4,11,10,"mf")+`</g>`);
-   if(k==="traps")spotsF.push(g+ell([hx-9,sy-1],7,3,14,"mf")+ell([hx+9,sy-1],7,3,-14,"mf")+`</g>`);
-   if(k==="core"&&tl>40)spotsF.push(g+ell([hx,hy-14],5.5,10,0,"mf")+`</g>`);
-  });
-  o+=spotsF.join("");
-  /* arms */
-  o+=limb(J.lS,J.lE,9.5,7.5,"bd")+limb(J.lE,J.lHa,7.5,5.5,"bd")+limb(J.rS,J.rE,9.5,7.5,"bd")+limb(J.rE,J.rHa,7.5,5.5,"bd");
-  o+=circ(J.lHa,3.6,"bd")+circ(J.rHa,3.6,"bd");
+  if(e[0]==="pdeck")o+=ln([p.hx-30,30],J.lE,5,"prl")+ln([p.hx+30,30],J.rE,5,"prl");
+  if(e[0]==="mgrip")o+=ln([J.lHa[0]-8,150],J.lHa,5,"prl")+ln([J.rHa[0]+8,150],J.rHa,5,"prl");
+  const sy=J.sy,hx=p.hx,hy=p.hy,tl=J.tl,out=[-1,0],inn=[1,0];
+  /* legs: shins, thighs, shorts, shoes */
+  const shO=[4.6,6.6,5.6,3.8,3],shI=[4.2,5.2,4.4,3.4,2.8],thO=[8.6,9.4,8.4,6.8,5.4],thI=[7.4,7.8,7,6,5];
+  o+=seg(J.lK,J.lA,shO,shI,out,"sk")+seg(J.rK,J.rA,shO,shI,[1,0],"sk");
+  o+=ell(add(J.lA,[-1.5,4]),6,3.6,0,"shoe")+ell(add(J.rA,[1.5,4]),6,3.6,0,"shoe");
+  o+=seg(J.lH,J.lK,thO,thI,out,"sk")+seg(J.rH,J.rK,thO,thI,[1,0],"sk");
+  o+=cover(J.lH,J.lK,thO,thI,out,0,.58,1,"so")+cover(J.rH,J.rK,thO,thI,[1,0],0,.58,1,"so");
+  o+=smooth([[hx-15,hy-3],[hx+15,hy-3],[hx+16,hy+8],[hx,hy+11],[hx-16,hy+8]],"so");
+  mus.forEach((k,i)=>{const g=`<g class="mh" style="opacity:${op(i)}">`;
+   if(k==="quads")o+=g+limb(mix(J.lH,J.lK,.15),mix(J.lH,J.lK,.85),11,7,"mf")+limb(mix(J.rH,J.rK,.15),mix(J.rH,J.rK,.85),11,7,"mf")+`</g>`;
+   if(k==="calf")o+=g+limb(mix(J.lK,J.lA,.15),mix(J.lK,J.lA,.6),9,6,"mf")+limb(mix(J.rK,J.rA,.15),mix(J.rK,J.rA,.6),9,6,"mf")+`</g>`});
+  /* torso in the tee */
+  const w=19;
+  o+=limb(J.neck,J.head,10,9,"sk");
+  o+=smooth([[hx-12.5,hy+3],[hx-13.5,hy-tl*.35],[hx-w-4,sy+8],[hx-w+1,sy-1],[hx-5,sy-3.5],[hx+5,sy-3.5],[hx+w-1,sy-1],[hx+w+4,sy+8],[hx+13.5,hy-tl*.35],[hx+12.5,hy+3],[hx,hy+5]],"sh");
+  o+=ln([hx-5,sy-2.8],[hx+5,sy-2.8],1.6,"seam");
+  o+=headF(J.head);
+  mus.forEach((k,i)=>{const g=`<g class="mh" style="opacity:${op(i)}">`;
+   if(/pec/.test(k)&&tl>40){const yy=k==="upec"?sy+9:k==="lpec"?sy+16:sy+12;o+=g+ell([hx-8,yy],8.5,6,8,"mf")+ell([hx+8,yy],8.5,6,-8,"mf")+`</g>`}
+   if(k==="lats")o+=g+ell([hx-14,sy+20],4.5,12,-10,"mf")+ell([hx+14,sy+20],4.5,12,10,"mf")+`</g>`;
+   if(k==="traps")o+=g+ell([hx-9,sy-1.5],7,3,14,"mf")+ell([hx+9,sy-1.5],7,3,-14,"mf")+`</g>`;
+   if(k==="core"&&tl>40)o+=g+ell([hx,hy-15],6,11,0,"mf")+`</g>`;
+   if(k==="obl"&&tl>40)o+=g+ell([hx-10,hy-13],4,9,-8,"mf")+ell([hx+10,hy-13],4,9,8,"mf")+`</g>`});
+  /* arms: forearms, upper arms, sleeves, fists */
+  const uO=[6.6,7.6,7.8,6.2,4.4],uI=[6.2,6.8,6.6,5.4,4.4],fO=[4.8,5.6,4.6,3.4,2.8],fI=[4.6,5,4,3.2,2.8];
+  const armS=(S,E,Ha,sd)=>{const f=[sd,0];return seg(E,Ha,fO,fI,f,"sk")+seg(S,E,uO,uI,f,"sk")+circ(add(S,[0,-1]),8.6,"sh")+cover(S,E,uO,uI,f,0,.42,1.1,"sh")+circ(Ha,4.3,"sk")};
+  o+=armS(J.lS,J.lE,J.lHa,-1)+armS(J.rS,J.rE,J.rHa,1);
   const dk=mus.findIndex(k=>/delt/.test(k));
-  if(dk>=0)o+=`<g class="mh" style="opacity:${(op(dk))}">`+circ(J.lS,7.2,"mf")+circ(J.rS,7.2,"mf")+`</g>`;
+  if(dk>=0)o+=`<g class="mh" style="opacity:${op(dk)}">`+circ(J.lS,8,"mf")+circ(J.rS,8,"mf")+`</g>`;
   const ak=mus.findIndex(k=>k==="bi"||k==="brach"||k==="tri"||k==="trilong");
-  if(ak>=0)o+=`<g class="mh" style="opacity:${(op(ak))}">`+limb(mix(J.lS,J.lE,.25),mix(J.lS,J.lE,.85),6,5,"mf")+limb(mix(J.rS,J.rE,.25),mix(J.rS,J.rE,.85),6,5,"mf")+`</g>`;
+  if(ak>=0)o+=`<g class="mh" style="opacity:${op(ak)}">`+limb(mix(J.lS,J.lE,.3),mix(J.lS,J.lE,.85),8,6,"mf")+limb(mix(J.rS,J.rE,.3),mix(J.rS,J.rE,.85),8,6,"mf")+`</g>`;
+  const fk=mus.findIndex(k=>k==="brrad"||k==="flex"||k==="ext");
+  if(fk>=0)o+=`<g class="mh" style="opacity:${op(fk)}">`+limb(mix(J.lE,J.lHa,.1),mix(J.lE,J.lHa,.7),7,5,"mf")+limb(mix(J.rE,J.rHa,.1),mix(J.rE,J.rHa,.7),7,5,"mf")+`</g>`;
   if(e[0]==="db")o+=dbF(J.lHa)+dbF(J.rHa);
   if(e[0]==="bbf"){const y=(J.lHa[1]+J.rHa[1])/2;o+=ln([J.lHa[0]-36,y],[J.rHa[0]+36,y],3.5,"bar")+`<rect class="pl" x="${f1(J.lHa[0]-42)}" y="${f1(y-17)}" width="9" height="34" rx="2"/><rect class="pl" x="${f1(J.rHa[0]+33)}" y="${f1(y-17)}" width="9" height="34" rx="2"/>`}
   if(e[0]==="cable2")o+=circ(J.lHa,2.5,"hub")+circ(J.rHa,2.5,"hub");
+  if(e[0]==="mgrip")o+=ln(add(J.lHa,[0,-6]),add(J.lHa,[0,6]),3.4,"bar")+ln(add(J.rHa,[0,-6]),add(J.rHa,[0,6]),3.4,"bar")+circ(J.lHa,4.3,"sk")+circ(J.rHa,4.3,"sk");
+  if(e[0]==="pdeck")o+=`<g opacity=".85">`+limb(mix(J.lE,J.lHa,.05),mix(J.lE,J.lHa,.9),9,9,"pdk")+limb(mix(J.rE,J.rHa,.05),mix(J.rE,J.rHa,.9),9,9,"pdk")+`</g>`;
   return o;
  }
  const J=side(p),U=J.U,fr=J.fr;
- if(ghost){let g=ln(J.hip,J.sho,13,"gh")+ln(J.hip,J.knee,9,"gh")+ln(J.knee,J.ank,7,"gh")+ln(J.sho,J.elb,7,"gh")+ln(J.elb,J.hand,6,"gh");return g}
- if(!ex.nofloor){const xs=[J.ank[0],J.fa[0],J.hip[0]],lo=Math.min(...xs)-8,hi=Math.max(...xs)+14;o=`<ellipse class="shadow" cx="${f1((lo+hi)/2)}" cy="200" rx="${f1(Math.max(18,(hi-lo)/2))}" ry="3.5"/>`+o}
- if(e[0]==="cable")o+=ln([e[1],e[2]],J.hand,1.3,"cbl")+circ([e[1],e[2]],4.5,"pl");
+ if(ghost)return ln(J.hip,J.sho,13,"gh")+ln(J.hip,J.knee,9,"gh")+ln(J.knee,J.ank,7,"gh")+ln(J.sho,J.elb,7,"gh")+ln(J.elb,J.hand,6,"gh");
+ if(!ex.nofloor){const xs=[J.ank[0],J.fa[0],J.hip[0]],lo=Math.min(...xs)-8,hi=Math.max(...xs)+14;o+=`<ellipse class="shadow" cx="${f1((lo+hi)/2)}" cy="200" rx="${f1(Math.max(18,(hi-lo)/2))}" ry="3.5"/>`}
+ const tip=J.tip||J.hand; /* where the hand holds the weight */
+ if(e[0]==="cable")o+=ln([e[1],e[2]],tip,1.3,"cbl")+circ([e[1],e[2]],4.5,"pl");
+ if(e[0]==="grip")o+=ln([e[1],e[2]],J.hand,6,"prl");
  if(e[0]==="land"){const v=nrm(sub(J.hand,[e[1],e[2]])),end=add(J.hand,mul(v,10));o+=ln([e[1],e[2]],end,4,"bar")+circ(add(J.hand,mul(v,14)),11,"pl")+circ(add(J.hand,mul(v,14)),2.2,"hub")}
- /* far limbs */
- o+=limb(J.hip,J.fk,13,8.5,"far")+limb(J.fk,J.fa,8.5,6,"far")+foot(J.fa,J.fk,J.fo2,"far");
- o+=limb(J.sho,J.fel,9,7,"far")+limb(J.fel,J.fha,7,5,"far")+circ(J.fha,3.4,"far");
- if((e[0]==="db"||e[0]==="db1")&&p.fh===undefined&&!p.one)o+=`<g opacity=".5">${dbS(J.fha)}</g>`;
- /* torso: back curve and chest */
- const T=(a,b)=>add(J.hip,add(mul(U,a*52),mul(fr,b)));
- o+=smooth([T(-.06,-7),T(.25,-7.5),T(.6,-8),T(.9,-8),T(1.04,-4),T(1.06,2),T(.98,7),T(.78,9.5),T(.58,7),T(.35,6.5),T(.08,7.5),T(-.08,3)],"bd");
- o+=limb(J.neck,add(J.head,mul(U,-6)),8.5,8,"bd")+circ(J.head,9.5,"bd")+circ(add(J.head,mul(fr,8.6)),2.2,"bd");
- /* near leg */
- o+=limb(J.hip,J.knee,14,9,"bd")+limb(J.knee,J.ank,9,6.2,"bd")+foot(J.ank,J.knee,J.fo,"bd");
- const vU=sub(J.elb,J.sho),vF=sub(J.hand,J.elb),cr=vU[0]*vF[1]-vU[1]*vF[0];
- let flex=nrm([-vU[1],vU[0]]);if(Math.abs(cr)>40?cr<0:dot(flex,fr)<0)flex=mul(flex,-1);
+ /* bend directions */
  const vT=sub(J.knee,J.hip),vS=sub(J.ank,J.knee),cl=vT[0]*vS[1]-vT[1]*vS[0];
  let kfl=nrm([-vT[1],vT[0]]);if(Math.abs(cl)>40?cl<0:dot(kfl,fr)>0)kfl=mul(kfl,-1);
- /* muscle overlays: torso and thigh ones go under the arm, arm ones on top of it */
+ const quadSide=mul(kfl,-1);
+ const vU=sub(J.elb,J.sho),vF=sub(J.hand,J.elb),cr=vU[0]*vF[1]-vU[1]*vF[0];
+ let flex=nrm([-vU[1],vU[0]]);if(Math.abs(cr)>40?cr<0:dot(flex,fr)<0)flex=mul(flex,-1);
+ const calfN=(knee,ank)=>{const v=nrm(sub(ank,knee));let n=[-v[1],v[0]];if(dot(n,kfl)<0)n=mul(n,-1);return n};
+ const ual=p.ual??1,ua=w=>w.map(x=>x*Math.pow(ual,.25));
+ /* far leg and arm, in shade */
+ o+=seg(J.fk,J.fa,PR.shB,PR.shF,calfN(J.fk,J.fa),"skf")+shoe(J.fa,J.fk,J.fo2,"shoef");
+ o+=seg(J.hip,J.fk,PR.thF,PR.thB,quadSide,"skf")+cover(J.hip,J.fk,PR.thF,PR.thB,quadSide,0,.6,1,"sof");
+ o+=seg(J.fel,J.fha,PR.faF,PR.faB,flex,"skf")+circ(J.fha,4,"skf");
+ o+=seg(J.sho,J.fel,ua(PR.uaF),ua(PR.uaB),flex,"skf")+cover(J.sho,J.fel,ua(PR.uaF),ua(PR.uaB),flex,0,.42,1.1,"shf");
+ if((e[0]==="db"||e[0]==="db1")&&p.fh===undefined&&!p.one)o+=`<g opacity=".55">${dbS(add(J.fha,sub(tip,J.hand)))}</g>`;
+ if(e[0]==="hack")o+=ln(add(J.hip,add(mul(U,4),mul(fr,-12))),add(J.hip,add(mul(U,50),mul(fr,-12))),8,"prl");
+ /* pelvis in shorts, neck, torso in the tee, head */
+ const T=(a,b)=>add(J.hip,add(mul(U,a*52),mul(fr,b)));
+ o+=smooth([T(.2,-8.6),T(.02,-10.6),T(-.1,-8),T(-.13,0),T(-.06,7.8),T(.2,8.2)],"so");
+ o+=limb(J.neck,add(J.head,mul(U,-6)),10,9,"sk");
+ o+=smooth([T(.14,-8.6),T(.38,-8.4),T(.6,-11.4),T(.84,-12),T(1.0,-8.5),T(1.07,-2),T(1.05,5),T(.94,12.6),T(.8,12.4),T(.66,8.6),T(.45,7.8),T(.22,8.4),T(.12,8)],"sh");
+ o+=ln(T(.13,-8),T(.13,7.8),1.2,"seam");
+ o+=head2(J.head,U,fr);
+ /* near leg */
+ o+=seg(J.knee,J.ank,PR.shB,PR.shF,calfN(J.knee,J.ank),"sk")+shoe(J.ank,J.knee,J.fo,"shoe");
+ o+=seg(J.hip,J.knee,PR.thF,PR.thB,quadSide,"sk")+cover(J.hip,J.knee,PR.thF,PR.thB,quadSide,0,.6,1,"so");
+ /* muscle glow: torso, thigh and calf under the arm, arm ones on top */
  let armMo="";
- mus.forEach((k,i)=>{const S=SPOT[k];if(!S)return;let c,rx=S[3],ry=S[4],a=0;const g=`<g class="mh" style="opacity:${(op(i))}">`;
-  if(S[0]==="D"){armMo+=g+circ(add(J.sho,add(mul(fr,S[1]),mul(U,-1))),7,"mf")+"</g>";return}
-  if(S[0]==="T"){c=T(S[1],S[2]);a=angOf(U)}
-  else if(S[0]==="UA"){c=add(mix(J.sho,J.elb,S[1]),mul(flex,S[2]));a=angOf(vU);rx*=p.ual??1}
+ mus.forEach((k,i)=>{const S=SPOT[k];if(!S)return;let c,rx=S[3],ry=S[4],a=0;const g=`<g class="mh" style="opacity:${op(i)}">`;
+  if(S[0]==="D"){armMo+=g+circ(add(J.sho,add(mul(fr,S[1]),mul(U,-1))),7.5,"mf")+"</g>";return}
+  if(S[0]==="T"){c=T(S[1],S[2]*1.15);a=angOf(U)}
+  else if(S[0]==="UA"){c=add(mix(J.sho,J.elb,S[1]),mul(flex,S[2]*1.3));a=angOf(vU);rx*=ual}
   else if(S[0]==="FA"){c=add(mix(J.elb,J.hand,S[1]),mul(flex,S[2]));a=angOf(vF)}
-  else if(S[0]==="TH"){c=add(mix(J.hip,J.knee,S[1]),mul(kfl,-S[2]));a=angOf(vT)}
+  else if(S[0]==="TH"){c=add(mix(J.hip,J.knee,S[1]),mul(kfl,-S[2]*1.3));a=angOf(vT);ry*=1.2}
+  else if(S[0]==="SH"){c=add(mix(J.knee,J.ank,S[1]),mul(calfN(J.knee,J.ank),S[2]));a=angOf(vS)}
   const el=g+ell(c,rx,ry,a,"mf")+"</g>";
-  if(S[0]==="T"||S[0]==="TH")o+=el;else armMo+=el});
+  if(S[0]==="T"||S[0]==="TH"||S[0]==="SH")o+=el;else armMo+=el});
  if(e[0]==="lp"){const u=dir(135),q=dir(45),c=add(J.ank,mul(u,5)),r=(307-c[0]-c[1])/1.414-3;o+=ln(add(c,mul(q,4)),add(c,mul(q,r)),6,"prl")+ln(add(c,mul(q,-20)),add(c,mul(q,r*.55)),6,"plt")}
- if(e[0]==="pad"){const v=nrm(sub(J.ank,J.knee));o+=circ(add(add(J.ank,mul(v,-3)),mul([-v[1],v[0]],-7)),6.5,"pl")}
- /* near arm */
- o+=limb(J.sho,J.elb,10.5*(p.ual??1)**.3,7.5,"bd")+limb(J.elb,J.hand,7.5,5.4,"bd")+circ(J.hand,3.8,"bd")+armMo;
- if(e[0]==="bb")o+=plate(J.hand,12);
- if(e[0]==="ez")o+=plate(J.hand,9);
- if(e[0]==="db1"||e[0]==="db")o+=dbS(J.hand);
- if(e[3]==="bar")o+=ln(add(J.hand,[-8,0]),add(J.hand,[8,0]),3.5,"bar")+circ(J.hand,3.8,"bd");
- else if(e[0]==="cable"){const v=nrm(sub([e[1],e[2]],J.hand));o+=ln(J.hand,add(J.hand,mul(v,6)),3,"bar")+circ(J.hand,3.8,"bd")}
+ if(e[0]==="pad"){const v=nrm(sub(J.ank,J.knee));o+=circ(add(add(J.ank,mul(v,-3)),mul([-v[1],v[0]],e[1]?7:-7)),6.5,"pl")}
+ if(e[0]==="calfpad")o+=ln(add(J.sho,mul(U,4)),[e[1],J.sho[1]-4],6,"prl")+circ(add(J.sho,mul(U,4)),5,"pl");
+ /* near arm: forearm, upper arm, delt and sleeve, fist */
+ o+=seg(J.elb,J.hand,PR.faF,PR.faB,flex,"sk")+seg(J.sho,J.elb,ua(PR.uaF),ua(PR.uaB),flex,"sk");
+ o+=circ(add(J.sho,mul(U,-1.5)),8.4,"sh")+cover(J.sho,J.elb,ua(PR.uaF),ua(PR.uaB),flex,0,.42,1.1,"sh");
+ o+=J.tip?limb(J.hand,J.tip,8.4,7.4,"sk"):circ(J.hand,4.3,"sk");
+ o+=armMo;
+ if(e[0]==="bb")o+=plate(tip,12);
+ if(e[0]==="ez")o+=plate(tip,9);
+ if(e[0]==="db1"||e[0]==="db")o+=dbS(tip);
+ if(e[0]==="grip")o+=ln(add(J.hand,[0,-6]),add(J.hand,[0,6]),3.4,"bar")+circ(J.hand,4.3,"sk");
+ if(e[3]==="bar")o+=ln(add(tip,[-8,0]),add(tip,[8,0]),3.5,"bar")+circ(tip,4.3,"sk");
+ else if(e[0]==="cable"){const v=nrm(sub([e[1],e[2]],tip));o+=ln(tip,add(tip,mul(v,6)),3,"bar")+circ(tip,J.tip?3.4:4.3,"sk")}
  return o;
 }
+
 const mix=(a,b,k)=>[a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k];
 /* bar path and end-position ghost are static per exercise: cached */
 const GH=new Map();
@@ -996,14 +1127,14 @@ function finishView(sc){
 
 /* ===== week ===== */
 function weekView(sc){
- const ORDER=["legs","chest","back","shoulders","triceps","biceps"];
- const cell=(d,m)=>{const i=DAYS[d].sl.findIndex((_,k)=>exAt(d,k).ex.m===m),{ex,int}=exAt(d,i);return `<td><button data-d="${d}" data-i="${i}">${esc(ex.n)}<small>${int}</small></button></td>`};
+ const ORDER=["legs","chest","back","shoulders","triceps","biceps","forearms","calves","abs"];
+ const cell=(d,m)=>{const i=DAYS[d].sl.findIndex((_,k)=>exAt(d,k).ex.m===m);if(i<0)return `<td class="nil">–</td>`;const {ex,int}=exAt(d,i);return `<td><button data-d="${d}" data-i="${i}">${esc(ex.n)}<small>${int}</small></button></td>`};
  sc.innerHTML=`<h2 class="sec">This week</h2>
  <div class="legend"><span><b>H</b> Heavy 6–8</span><span><b>M</b> Medium 8–12</span><span><b>P</b> Pump 12–15</span></div>
  <div class="tbl"><table><tr><th></th>${DAYS.slice(0,6).map((d,i)=>`<th>D${i+1} ${d.wk}</th>`).join("")}</tr>
  ${ORDER.map(m=>`<tr><td class="m" style="--c:var(${G[m][1]})">${G[m][0]}</td>${DAYS.slice(0,6).map((_,d)=>cell(d,m)).join("")}</tr>`).join("")}
  <tr><td class="m" style="--c:var(--accent)">Cardio</td>${DAYS.slice(0,6).map(d=>`<td>${d.cardio[0]}</td>`).join("")}</tr></table></div>
- <p class="muted">Friday is rest. Tap any exercise to open it. Every muscle gets 2 heavy, 2 medium and 2 pump days each week.</p>`;
+ <p class="muted">Friday is rest. Tap any exercise to open it. The 6 main muscles get 2 heavy, 2 medium and 2 pump days each week. Forearms every day, calves and abs on alternate days. About 70% machines, 30% free weights.</p>`;
  sc.querySelectorAll("td button").forEach(b=>b.onclick=()=>{day=+b.dataset.d;idx=+b.dataset.i+1;tab="work";dirn="r";render();scrollTo(0,0)});
 }
 
@@ -1048,12 +1179,12 @@ function guideView(sc){
  const wn=weekNo();
  sc.innerHTML=`<h2 class="sec">Trainer's guide</h2>
  <div class="box gd"><h3>How this plan works</h3>
- <p>You train every muscle every day with one exercise, 6 days a week. Hitting a muscle often builds it fast, but only if each day is not too hard. So each muscle rotates through three kinds of days:</p>
+ <p>You train every main muscle every day with one exercise, 6 days a week, then finish with forearms and either calves or abs. That's 8 exercises a day, about 70% on machines and 30% with free weights. Hitting a muscle often builds it fast, but only if each day is not too hard. So each main muscle rotates through three kinds of days:</p>
  <div class="itbl"><div class="hd"></div><div class="hd">Reps</div><div class="hd">Rest</div><div class="hd">Feel</div>
  <div><b>Heavy</b></div><div>6–8</div><div>2 min</div><div>2 reps left</div>
  <div><b>Medium</b></div><div>8–12</div><div>90 sec</div><div>1–2 left</div>
  <div><b>Pump</b></div><div>12–15</div><div>60 sec</div><div>Burn</div></div>
- <p>Every muscle gets 2 of each kind per week, and every day has 2 heavy, 2 medium and 2 pump exercises. Heavy ones come first while you are fresh.</p></div>
+ <p>Every main muscle gets 2 of each kind per week. Heavy ones come first while you are fresh. Forearms, calves and abs are always pump: light weight, high reps, 60 sec rest.</p></div>
  <div class="box gd"><h3>Lift the right way</h3><ul>
  <li><b>Tempo:</b> lift in 1 second, squeeze, lower in 2 seconds. The coach button counts this for you.</li>
  <li><b>Form first:</b> if your form breaks, the weight is too heavy.</li>
